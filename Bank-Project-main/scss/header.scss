@@ -1,0 +1,150 @@
+.header {
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px 0px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .left_side,
+    .right_side {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .left_side span,
+    .right_side span {
+        transition: .5s ease;
+        cursor: pointer;
+    }
+
+    .left_side span:hover,
+    .right_side span:hover {
+        color: rgb(68, 68, 68);
+    }
+
+    .right_side img {
+        cursor: pointer;
+    }
+    .right_side button {
+        all: unset;
+        font-weight: 500;
+    }
+    .right_side button:hover {
+        color: #3333CC;
+    }
+    .right_side button:active {
+        scale: .9;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left_side button {
+        all: unset;
+        background-color: #EAEAF9;
+        color: #3333CC;
+        border-radius: 10px;
+        padding: 10px 40px;
+        font-weight: 600;
+    }
+    .left_side button:hover {
+        background-color: yellow;
+        color: #3333CC;
+    }
+    .left_side button:active {
+        scale: .9;
+    }
+    .middle input {
+        all: unset;
+        width: 500px;
+        border-radius: 10px;
+        padding: 10px 20px;
+        color: black;
+        border: 2px solid #E2EAF1;
+        text-align: left;
+    }
+    .middle {
+        display: inline-flex;
+        text-align: left;
+
+        img {
+            width: 15px;
+            height: 16px;
+            background-size: contain;
+            transform: translate(-30px,15px);
+        }
+    }
+
+    .userDiv {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+
+.modal {
+    display: none;
+    width: 600px;
+    height: 330px;
+    background: #80c7eb;
+    border-radius: 10px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    transition: 1s ease;
+    padding-top: 25px;
+    padding-left: 30px;
+
+    h2 {
+        font-size: 30px;
+        color: white;
+        font-family: sans-serif;
+    }
+
+
+    .btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        margin-top: 210px;
+        margin-right: 40px;
+    }
+
+    .btnOut {
+        all: unset;
+        padding: 10px 45px;
+        text-align: center;
+        background-color: blue;
+
+        color: white;
+
+        font-size: 20px;
+        font-family: sans-serif;
+        cursor: pointer;
+    }
+
+    .btnExit {
+        all: unset;
+        padding: 10px 45px;
+        text-align: center;
+        background-color: red;
+
+        color: white;
+
+        font-size: 20px;
+        font-family: sans-serif;
+
+        margin-left: 20px;
+        cursor: pointer;
+    }
+}
