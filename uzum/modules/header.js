@@ -43,7 +43,7 @@ export function header(params) {
   cardBtn.innerHTML = 'Корзина'
   katalog.innerHTML = "Каталог"
   lupa.src = "/public/icons/lupa.svg";
-  logo.src = "/public/icons/Group.svg";
+  logo.src = "/public/img/logo.png";
   userLogo.src = "/public/icons/user.svg";
 
 

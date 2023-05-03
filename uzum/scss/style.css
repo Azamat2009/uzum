@@ -190,16 +190,17 @@ div.sim-slider-arrow-right {
 
 div.sim-slider-arrow-left {
   left: 10px;
-  top: 40%;
+  top: 45%;
   display: block;
-  background: url("http://pvbk.spb.ru/inc/slider/sim-files/sim-arrow-left.png") no-repeat;
+  background: url("/public/icons/2203523_arrow_back_botton_left_icon.svg") no-repeat;
 }
 
 div.sim-slider-arrow-right {
   right: 10px;
-  top: 40%;
+  top: 45%;
+  background-size: contain;
   display: block;
-  background: url("http://pvbk.spb.ru/inc/slider/sim-files/sim-arrow-right.png") no-repeat;
+  background: url("/public/icons/2203522_arrow_botton_next_right_icon.svg") no-repeat;
 }
 
 div.sim-slider-arrow-left:hover {
@@ -216,7 +217,7 @@ div.sim-slider-dots {
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 3;
+  z-index: 2;
   text-align: center;
 }
 
@@ -226,7 +227,7 @@ span.sim-dot {
   margin: 5px 7px;
   padding: 0;
   display: inline-block;
-  background-color: #BBB;
+  background-color: rgba(255, 255, 255, 0.3019607843);
   border-radius: 5px;
   cursor: pointer;
 }
@@ -234,7 +235,7 @@ span.sim-dot {
 .cards, .cards2, .cards3 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
+  grid-gap: 30px;
 }
 .cards .card, .cards2 .card, .cards3 .card {
   display: flex;
@@ -264,26 +265,27 @@ span.sim-dot {
 }
 .cards .card .heart, .cards2 .card .heart, .cards3 .card .heart {
   position: absolute;
-  transform: translate(200px, 0px);
+  transform: translate(220px, 0px);
 }
 .cards .card .heart-none, .cards2 .card .heart-none, .cards3 .card .heart-none {
   position: absolute;
-  transform: translate(200px, 0px);
+  transform: translate(220px, 0px);
 }
 .cards .card .heart2, .cards2 .card .heart2, .cards3 .card .heart2 {
   position: absolute;
-  transform: translate(200px, 0px);
+  transform: translate(220px, 0px);
   display: none;
 }
 .cards .card .heart2-active, .cards2 .card .heart2-active, .cards3 .card .heart2-active {
   position: absolute;
-  transform: translate(200px, 0px);
+  transform: translate(220px, 0px);
   display: block;
 }
 .cards .card img, .cards2 .card img, .cards3 .card img {
   background-size: contain;
 }
 .cards .card #cardImg, .cards2 .card #cardImg, .cards3 .card #cardImg {
+  transform: translate(0px, -8px);
   width: 30px;
   height: 30px;
 }/*# sourceMappingURL=style.css.map */

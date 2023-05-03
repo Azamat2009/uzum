@@ -199,16 +199,17 @@ body .i .container {
   
   div.sim-slider-arrow-left {
     left: 10px;
-    top: 40%;
+    top: 45%;
     display: block;
-    background: url("http://pvbk.spb.ru/inc/slider/sim-files/sim-arrow-left.png") no-repeat;
+    background: url("/public/icons/2203523_arrow_back_botton_left_icon.svg") no-repeat;
   }
   
   div.sim-slider-arrow-right {
     right: 10px;
-    top: 40%;
+    top: 45%;
+    background-size: contain;
     display: block;
-    background: url("http://pvbk.spb.ru/inc/slider/sim-files/sim-arrow-right.png") no-repeat;
+    background: url("/public/icons/2203522_arrow_botton_next_right_icon.svg") no-repeat;
   }
   
   div.sim-slider-arrow-left:hover {
@@ -225,7 +226,7 @@ body .i .container {
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: 2;
     text-align: center;
   }
   
@@ -235,7 +236,7 @@ body .i .container {
     margin: 5px 7px;
     padding: 0;
     display: inline-block;
-    background-color: #BBB;
+    background-color: #FFFFFF4D;
     border-radius: 5px;
     cursor: pointer;
   }
@@ -246,7 +247,7 @@ body .i .container {
 .cards, .cards2 , .cards3 {
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    grid-gap: 20px;
+    grid-gap: 30px;
 
     .card {
         display: flex;
@@ -280,26 +281,27 @@ body .i .container {
         }
         .heart {
             position: absolute;
-            transform: translate(200px,00px);
+            transform: translate(220px,0px);
         }
         .heart-none {
             position: absolute;
-            transform: translate(200px,00px);
+            transform: translate(220px,00px);
         }
         .heart2 {
             position: absolute;
-            transform: translate(200px,00px);
+            transform: translate(220px,00px);
             display: none;
         }
         .heart2-active {
             position: absolute;
-            transform: translate(200px,00px);
+            transform: translate(220px,00px);
             display: block;
         }
         img {
             background-size: contain;
         }
         #cardImg {
+            transform: translate(0px,-8px);
             width: 30px;
             height: 30px 
         }
