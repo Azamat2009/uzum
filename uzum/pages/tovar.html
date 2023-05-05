@@ -3,17 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml"
     href="/public/icons/icon.png"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/header.css" />
+    <link rel="stylesheet" href="/scss/tovar.css" />
     <link rel="stylesheet" href="/scss/style.css" />
-	<link rel="stylesheet" href="/scss/header.css" />
-	<link rel="stylesheet" href="/scss/footer.css" />
-    <title>Uzum - Избранные товары</title>
+    <link rel="stylesheet" href="/scss/footer.css" />
+    <title>Document</title>
 </head>
 <body>
+    
 
-    <div id="app"></div>
+    <div id="app">
+		<div class="tovar-flex">
+			<div class="tovar-left">
+				<div class="sim-slider">
+					<ul class="sim-slider-list">
+					  <li><img src="/public/img/product.png" alt="screen"></li> <!-- это экран -->
+					  <li class="sim-slider-element"><img src="/public/img/product2.png" alt="0"></li>
+					  <li class="sim-slider-element"><img src="/public/img/product3.png" alt="1"></li>
+					  <li class="sim-slider-element"><img src="/public/img/pr.jpg" alt="2"></li>
+					</ul>
+					<div class="sim-slider-arrow-left"></div>
+					<div class="sim-slider-arrow-right"></div>
+					<div class="sim-slider-dots"></div>
+				  </div>
+			</div>
+			<div class="tovar-right">
+				<br> <br>
+				<h2 id="tov-title">Подсолнечное масло Sofia, рафинированное и дезодорированное, 1 л</h2>
+				<br><br>
+				<div class="prices">
+					<span id="tov-new-price">30 000 сум</span>
+					<span id="tov-old-price">45 000 сум</span>
+				</div>
+			</div>
+
+		</div>
+
+    </div>
 
     <footer>
 		<div class="aboutUs">
@@ -85,8 +114,11 @@
 		</a>
 		<span>«2023© ИП ООО «AZAMAT». ИНН 309376127. Все права защищены»</span>
 	</div>
-    
+
     <script type="module" src="/modules/header.js"></script>
-    <script type="module" src="/modules/footer.js"></script>
+	<script type="module" src="/main.js"></script>
+	<script type="module" src="/modules/slider.js"></script>
+	<script type="module" src="/modules/footer.js"></script>
+    <script type="module" src="/modules/tovar.js"></script>
 </body>
 </html>

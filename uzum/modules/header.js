@@ -33,6 +33,7 @@ export function header(params) {
   right_side.classList.add("right_side");
   userDiv.classList.add("userDiv");
 
+  userHref.href = "/pages/tovar.html"
   favouriteHref.href = "/pages/favorite.html"
   logoHref.href = "/index.html"
   searchInp.type = "search"
@@ -47,13 +48,14 @@ export function header(params) {
   userLogo.src = "/public/icons/user.svg";
 
 
+  userHref.append(userDiv)
   favouriteHref.append(favouriteBtn)
   logoHref.append(logo)
   body.prepend(header);
   header.append(left_side,middle ,right_side);
   left_side.append(logoHref,katalog);
   userDiv.append(userLogo,userBtn)
-  right_side.append(userDiv,favouriteHref,cardBtn);
+  right_side.append(userHref,favouriteHref,cardBtn);
   middle.append(searchInp,lupa)
 }
 
