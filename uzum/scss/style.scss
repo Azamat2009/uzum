@@ -300,6 +300,10 @@ body .i .container {
         img {
             background-size: contain;
         }
+        .productImage {
+            background-size: contain;
+            height: 200px;
+        }
         #cardImg {
             transform: translate(0px,-8px);
             width: 30px;

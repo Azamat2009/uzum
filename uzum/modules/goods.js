@@ -10,8 +10,14 @@ fetch(baseURL)
             const cardDiv = document.createElement("div");
             cardDiv.classList.add("card");
 
+
             const img1 = document.createElement("img");
             img1.src = good.media[0];
+            img1.classList.add("productImage")
+
+            let productPage = document.createElement("a")
+            productPage.href = `/pages/tovar.html?id=${good.id}`
+            productPage.append(img1)
 
             const img2 = document.createElement("img");
             img2.classList.add("heart");
@@ -44,7 +50,7 @@ fetch(baseURL)
             bottomCardDiv.appendChild(span2);
             bottomCardDiv.appendChild(img4);
 
-            cardDiv.appendChild(img1);
+            cardDiv.appendChild(productPage);
             cardDiv.appendChild(img2);
             cardDiv.appendChild(img3);
             cardDiv.appendChild(h3);
@@ -71,8 +77,14 @@ fetch(baseURL)
             const cardDiv = document.createElement("div");
             cardDiv.classList.add("card");
 
+
             const img1 = document.createElement("img");
             img1.src = good.media[0];
+            img1.classList.add("productImage")
+
+            let productPage = document.createElement("a")
+            productPage.href = `/pages/tovar.html?id=${good.id}`
+            productPage.append(img1)
 
             const img2 = document.createElement("img");
             img2.classList.add("heart");
@@ -105,7 +117,7 @@ fetch(baseURL)
             bottomCardDiv.appendChild(span2);
             bottomCardDiv.appendChild(img4);
 
-            cardDiv.appendChild(img1);
+            cardDiv.appendChild(productPage);
             cardDiv.appendChild(img2);
             cardDiv.appendChild(img3);
             cardDiv.appendChild(h3);
@@ -132,8 +144,14 @@ fetch(baseURL)
             const cardDiv = document.createElement("div");
             cardDiv.classList.add("card");
 
+
             const img1 = document.createElement("img");
             img1.src = good.media[0];
+            img1.classList.add("productImage")
+
+            let productPage = document.createElement("a")
+            productPage.href = `/pages/tovar.html?id=${good.id}`
+            productPage.append(img1)
 
             const img2 = document.createElement("img");
             img2.classList.add("heart");
@@ -166,7 +184,7 @@ fetch(baseURL)
             bottomCardDiv.appendChild(span2);
             bottomCardDiv.appendChild(img4);
 
-            cardDiv.appendChild(img1);
+            cardDiv.appendChild(productPage);
             cardDiv.appendChild(img2);
             cardDiv.appendChild(img3);
             cardDiv.appendChild(h3);

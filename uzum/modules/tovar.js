@@ -1,3 +1,102 @@
+let baseURL = "http://localhost:3000/goods"
+let id = location.search
+
+fetch(baseURL + id)
+    .then(res => res.json())
+    .then(user => {
+        user = user[0]
+
+
+        let app = document.querySelector(".tovar-right")
+        let tovarBottomDiv = document.querySelector(".tovar-bottom")
+
+        let tovarFlex = document.createElement("div");
+        tovarFlex.classList.add("tovar-flex");
+
+
+        let tovTitle = document.createElement("h2");
+        tovTitle.textContent = user.title;
+
+        let prices = document.createElement("div");
+        prices.classList.add("prices");
+
+
+        let tovOldPrice = document.createElement("span");
+        tovOldPrice.id = "tov-old-price";
+        tovOldPrice.innerHTML = user.price + " сум";
+
+
+        
+        let tovNewPrice = document.createElement("span");
+        tovNewPrice.id = "tov-new-price";
+        tovNewPrice.textContent =  ""           
+
+        fetch(`${baseURL}/${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+            const newPrice = user.price * (100 - data.salePercentage) / 100;
+            tovNewPrice.textContent = newPrice.toFixed(0) + " сум"; 
+        })
+        .catch(err => console.error(err));;
+
+        prices.appendChild(tovNewPrice);
+        prices.appendChild(tovOldPrice);
+
+        let plus = document.createElement("div");
+        plus.classList.add("plus");
+
+        let hr = document.createElement("hr");
+
+        let description = document.createElement("p");
+        description.innerHTML = "Станьте востребованным разработчиком. Вы изучите основы программирования и основные концепции компьютерных наук, цифровые технологии, операционные системы, программное обеспечение, базы данных, системы аналитики, языки программирования и многое другое. Познакомитесь с тестированием и системным анализом. На программе сможете сделать осознанный выбор специализации и технологий, прокачаться в выбранном направлении.";
+
+        let btns = document.createElement("div");
+        btns.classList.add("btns");
+
+        let addToCartBtn = document.createElement("button");
+        addToCartBtn.classList.add("add-cart");
+        addToCartBtn.textContent = "Добавить в корзину";
+
+        let addToFavBtn = document.createElement("button");
+        addToFavBtn.classList.add("add-fav");
+        addToFavBtn.textContent = "Добавить в избранное";
+
+        btns.appendChild(addToCartBtn);
+        btns.appendChild(addToFavBtn);
+
+        //bottom
+
+        let tovarBottom = document.createElement("div");
+
+        let tovBottomTitle = document.createElement("h2");
+        tovBottomTitle.textContent = "Описание товара";
+
+        let tovBottomDescription = document.createElement("p");
+        tovBottomDescription.innerHTML = user.description;
+
+        tovarBottom.appendChild(tovBottomTitle);
+        tovarBottom.appendChild(tovBottomDescription);
+
+
+        app.appendChild(document.createElement("br"));
+        app.appendChild(tovTitle);
+        app.appendChild(document.createElement("br"));
+        app.appendChild(document.createElement("br"));
+        app.appendChild(prices);
+        app.append(right)
+        app.appendChild(document.createElement("br"));
+        app.appendChild(hr);
+        app.appendChild(document.createElement("br"));
+        app.appendChild(description);
+        app.appendChild(document.createElement("br"));
+        app.appendChild(btns);
+
+
+        app.appendChild(tovarFlex);
+        tovarBottomDiv.appendChild(tovarBottom);
+})
+
+
 // плюс и минус
 let right = document.createElement("div");
 let plusBtn = document.createElement("button");
@@ -27,96 +126,24 @@ right.append(countSpan);
 right.append(plusBtn);
 
 
+// похожие товары
 
-let baseURL = "http://localhost:3000/goods"
 let cards = document.querySelector(".cards")
-let app = document.querySelector(".tovar-right")
-let tovarBottomDiv = document.querySelector(".tovar-bottom")
-
-let tovarFlex = document.createElement("div");
-tovarFlex.classList.add("tovar-flex");
-
-
-let tovTitle = document.createElement("h2");
-tovTitle.id = "tov-title";
-tovTitle.textContent = "Подсолнечное масло Sofia, рафинированное и дезодорированное, 1 л";
-
-let prices = document.createElement("div");
-prices.classList.add("prices");
-
-let tovNewPrice = document.createElement("span");
-tovNewPrice.id = "tov-new-price";
-tovNewPrice.textContent = "30 000 сум";
-
-let tovOldPrice = document.createElement("span");
-tovOldPrice.id = "tov-old-price";
-tovOldPrice.textContent = "45 000 сум";
-
-prices.appendChild(tovNewPrice);
-prices.appendChild(tovOldPrice);
-
-let plus = document.createElement("div");
-plus.classList.add("plus");
-
-let hr = document.createElement("hr");
-
-let description = document.createElement("p");
-description.textContent = "Станьте востребованным разработчиком. Вы изучите основы программирования и основные концепции компьютерных наук, цифровые технологии, операционные системы, программное обеспечение, базы данных, системы аналитики, языки программирования и многое другое. Познакомитесь с тестированием и системным анализом. На программе сможете сделать осознанный выбор специализации и технологий, прокачаться в выбранном направлении.";
-
-let btns = document.createElement("div");
-btns.classList.add("btns");
-
-let addToCartBtn = document.createElement("button");
-addToCartBtn.classList.add("add-cart");
-addToCartBtn.textContent = "Добавить в корзину";
-
-let addToFavBtn = document.createElement("button");
-addToFavBtn.classList.add("add-fav");
-addToFavBtn.textContent = "Добавить в избранное";
-
-btns.appendChild(addToCartBtn);
-btns.appendChild(addToFavBtn);
-
-//bottom
-
-let tovarBottom = document.createElement("div");
-
-let tovBottomTitle = document.createElement("h2");
-tovBottomTitle.textContent = "Описание товара";
-
-let tovBottomDescription = document.createElement("p");
-tovBottomDescription.textContent = "Стиральный порошок Tide Lenor Touch подходит для использования в стиральных машинах любого типа. Сочетание очищающего эффекта порошка и смягчающего эффекта Lenor делает вещи безупречно чистыми, нежными и свежими. Стирайте согласно рекомендациям на ярлыках текстильных изделий. Рекомендованный режим стирки — от 20 минут при температуре воды 30'C и выше. Обратите внимание: порошок не предназначен для стирки изделий из шерсти и шелка. Синтетическое моющее средство порошкообразное для использования в стиральных машинах любого типа. Рекомендованная температура стирки указана на ярлыках текстильных изделий. Не перегружайте стиральную машину. Оставьте зазор в ширину ладони между загруженным бельем и барабаном. Белье будет двигаться свободно, стирка будет более эффективной.";
-
-tovarBottom.appendChild(tovBottomTitle);
-tovarBottom.appendChild(tovBottomDescription);
-
-
-app.appendChild(document.createElement("br"));
-app.appendChild(tovTitle);
-app.appendChild(document.createElement("br"));
-app.appendChild(document.createElement("br"));
-app.appendChild(prices);
-app.append(right)
-app.appendChild(document.createElement("br"));
-app.appendChild(hr);
-app.appendChild(document.createElement("br"));
-app.appendChild(description);
-app.appendChild(document.createElement("br"));
-app.appendChild(btns);
-
-
-app.appendChild(tovarFlex);
-tovarBottomDiv.appendChild(tovarBottom);
-
 fetch(baseURL)
     .then(res => res.json())
     .then(goods => {
-        goods.slice(0, 5).forEach(good => {
+        goods.slice(40, 45).forEach(good => {
             const cardDiv = document.createElement("div");
             cardDiv.classList.add("card");
 
+
             const img1 = document.createElement("img");
             img1.src = good.media[0];
+            img1.classList.add("productImage")
+
+            let productPage = document.createElement("a")
+            productPage.href = "/pages/tovar.html"
+            productPage.append(img1)
 
             const img2 = document.createElement("img");
             img2.classList.add("heart");
@@ -149,7 +176,7 @@ fetch(baseURL)
             bottomCardDiv.appendChild(span2);
             bottomCardDiv.appendChild(img4);
 
-            cardDiv.appendChild(img1);
+            cardDiv.appendChild(productPage);
             cardDiv.appendChild(img2);
             cardDiv.appendChild(img3);
             cardDiv.appendChild(h3);
@@ -168,3 +195,30 @@ fetch(baseURL)
         });
     })
     .catch(err => console.error(err));
+
+
+
+//slide to top
+const backToTopBtn = document.querySelector('#back-to-top-btn');
+
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 0) {
+    backToTopBtn.style.display = 'block';
+  } else {
+    backToTopBtn.style.display = 'none';
+  }
+
+  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+    backToTopBtn.style.bottom = '80px'; // измените значение, если нужно
+  } else {
+    backToTopBtn.style.bottom = '20px'; // измените значение, если нужно
+  }
+});
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});

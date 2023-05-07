@@ -284,6 +284,10 @@ span.sim-dot {
 .cards .card img, .cards2 .card img, .cards3 .card img {
   background-size: contain;
 }
+.cards .card .productImage, .cards2 .card .productImage, .cards3 .card .productImage {
+  background-size: contain;
+  height: 200px;
+}
 .cards .card #cardImg, .cards2 .card #cardImg, .cards3 .card #cardImg {
   transform: translate(0px, -8px);
   width: 30px;

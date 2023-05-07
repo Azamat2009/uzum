@@ -12,7 +12,7 @@
       "rating": 4.1,
       "price": 20999,
       "isBlackFriday": false,
-      "salePercentage": 100,
+      "salePercentage": 10,
       "media": [
         "https://img.mvideo.ru/Big/50138276bb.jpg"
       ],
@@ -22,7 +22,7 @@
       "id": 2,
       "favourite": false,
       "title": "Кресло компьютерное игровое Red Square Pro Pure Black (RSQ-50020)",
-      "description": "",
+      "description": "Кресло компьютерное игровое Red Square Pro Pure Black (RSQ-50020)",
       "colors": [
         "black"
       ],

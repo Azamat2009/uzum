@@ -57,6 +57,7 @@ export function header(params) {
   userDiv.append(userLogo,userBtn)
   right_side.append(userHref,favouriteHref,cardBtn);
   middle.append(searchInp,lupa)
+
 }
 
 header()
