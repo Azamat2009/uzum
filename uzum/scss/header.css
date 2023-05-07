@@ -12,7 +12,7 @@
 .header .right_side {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 .header .left_side span,
 .header .right_side span {
