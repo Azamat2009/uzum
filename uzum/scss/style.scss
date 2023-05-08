@@ -279,12 +279,14 @@ body .i .container {
             text-decoration: line-through;
             color: #c4c4c4;
         }
+
         .heart {
             position: absolute;
             transform: translate(220px,0px);
         }
         .heart-none {
             position: absolute;
+            display: none;
             transform: translate(220px,00px);
         }
         .heart2 {
@@ -297,6 +299,7 @@ body .i .container {
             transform: translate(220px,00px);
             display: block;
         }
+
         img {
             background-size: contain;
         }

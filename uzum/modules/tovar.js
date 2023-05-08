@@ -25,7 +25,8 @@ fetch(baseURL + id)
         tovOldPrice.id = "tov-old-price";
         tovOldPrice.innerHTML = user.price + " сум";
 
-
+         let newPageTitle = "Купить - " + user.title;
+        document.title = newPageTitle;
         
         let tovNewPrice = document.createElement("span");
         tovNewPrice.id = "tov-new-price";

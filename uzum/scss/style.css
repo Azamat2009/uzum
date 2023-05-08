@@ -269,6 +269,7 @@ span.sim-dot {
 }
 .cards .card .heart-none, .cards2 .card .heart-none, .cards3 .card .heart-none {
   position: absolute;
+  display: none;
   transform: translate(220px, 0px);
 }
 .cards .card .heart2, .cards2 .card .heart2, .cards3 .card .heart2 {
