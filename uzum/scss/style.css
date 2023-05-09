@@ -293,4 +293,67 @@ span.sim-dot {
   transform: translate(0px, -8px);
   width: 30px;
   height: 30px;
+}
+
+#back-to-top-btn {
+  height: 50px;
+  width: 50px;
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
+  font-size: 16px;
+  background-color: #7000FF;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 100%;
+  padding: 2px 0 0 2px;
+  transition: 1s;
+}
+
+.izbranoe {
+  display: block;
+}
+
+.izbranoe-none {
+  display: none;
+}
+
+center {
+  margin-top: 100px;
+  margin-bottom: 250px;
+}
+center .hearts {
+  background-size: contain;
+  display: none;
+}
+center .hearts-active {
+  background-size: contain;
+  display: block;
+}
+center .add {
+  display: none;
+}
+center .add-active {
+  display: block;
+}
+center .text {
+  display: none;
+}
+center .text-active {
+  display: block;
+}
+center p {
+  transform: translate(0px, -30px);
+}
+center p a {
+  color: purple;
+  text-decoration: none;
+}
+center p :hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=style.css.map */

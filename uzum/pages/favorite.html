@@ -8,16 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/scss/style.css" />
 	<link rel="stylesheet" href="/scss/header.css" />
+	<link rel="stylesheet" href="/scss/tovar.css" />
 	<link rel="stylesheet" href="/scss/footer.css" />
     <title>Uzum - Избранные товары</title>
 </head>
 <body>
 
     <div id="app">
-		<h1>Избранное</h1>
+		<h1 class="izbranoe">Избранное</h1>
 		<br>
 		<div class="cards">
 		</div>
+
+		<center>
+			<img class="hearts" src="/public/icons/hearts 1.png" alt="">
+			<h1 class="add">Добавьте то, что понравилось</h1>
+			<p class="text">Перейдите на главную страницу и нажмите на ♡ в товаре <br>
+				<a href="/index.html">На главную</a></p>
+		</center>
+
+		<button id="back-to-top-btn">
+			<img src="/public/icons/chevrons-up.svg" alt="">
+		</button>
 	</div>
 
     <footer>
@@ -90,7 +102,8 @@
 		</a>
 		<span>«2023© ИП ООО «AZAMAT». ИНН 309376127. Все права защищены»</span>
 	</div>
-    
+
+	<script type="module" src="/modules/toTop.js"></script>
 	<script type="module" src="/modules/favorite.js"></script>
     <script type="module" src="/modules/header.js"></script>
     <script type="module" src="/modules/footer.js"></script>

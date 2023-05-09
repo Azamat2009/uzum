@@ -1,4 +1,3 @@
-
 let baseURL = "http://localhost:3000/goods";
 let cards = document.querySelector('.cards');
 
@@ -9,7 +8,7 @@ fetch(baseURL)
     favouriteGoods.forEach(good => {
       const cardDiv = document.createElement("div");
       const img1 = document.createElement("img");
-      let productPage = document.createElement("a")
+      let productPage = document.createElement("a");
       const heart = document.createElement("img");
       const heartActive = document.createElement("img");
       const h3 = document.createElement("h3");
@@ -18,20 +17,20 @@ fetch(baseURL)
       const span2 = document.createElement("span");
       const img4 = document.createElement("img");
       cardDiv.classList.add("card");
-      img1.classList.add("productImage")
+      img1.classList.add("productImage");
       beforeSale.classList.add("before-sale");
-      heart.classList.add("heart")
-      heartActive.classList.add("heart2")
+      heart.classList.add("heart");
+      heartActive.classList.add("heart2");
       bottomCardDiv.classList.add("bottom-card");
 
-      productPage.href = `/pages/tovar.html?id=${good.id}`
+      productPage.href = `/pages/tovar.html?id=${good.id}`;
       heart.src = "/public/icons/heart.svg";
       heart.alt = "";
       heartActive.src = "/public/icons/heart 1.png";
       heartActive.alt = "";
       h3.innerHTML = good.title;
       span2.textContent = good.price;
-      beforeSale.textContent = good.price + " сум"
+      beforeSale.textContent = good.price + " сум";
       img1.src = good.media[0];
       img4.id = "cardImg";
       img4.src = "/public/icons/card.svg";
@@ -39,7 +38,7 @@ fetch(baseURL)
 
       bottomCardDiv.appendChild(span2);
       bottomCardDiv.appendChild(img4);
-      productPage.append(img1)
+      productPage.append(img1);
       cardDiv.appendChild(productPage);
       cardDiv.appendChild(heart);
       cardDiv.appendChild(heartActive);
@@ -48,62 +47,60 @@ fetch(baseURL)
       cardDiv.appendChild(bottomCardDiv);
 
       if (good.favourite) {
-        heart.classList.add('heart-none');
-        heartActive.classList.add('heart2-active');
+        heart.classList.add("heart-none");
+        heartActive.classList.add("heart2-active");
       } else {
-        heart.classList.remove('heart-none');
-        heartActive.classList.remove('heart2-active');
+        heart.classList.remove("heart-none");
+        heartActive.classList.remove("heart2-active");
       }
 
-      heart.addEventListener('click', () => {
+      heart.addEventListener("click", () => {
         if (!good.favourite) {
-          heart.classList.add('heart-none');
-          heartActive.classList.add('heart2-active');
+          heart.classList.add("heart-none");
+          heartActive.classList.add("heart2-active");
           good.favourite = true;
 
           fetch(`${baseURL}/${good.id}`, {
-            method: 'PATCH',
+            method: "PATCH",
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({ favourite: true })
+            body: JSON.stringify({ favourite: true }),
           })
-            .then(res => {
+            .then((res) => {
               if (!res.ok) {
-                throw new Error('Failed to update favourite');
+                throw new Error("Failed to update favourite");
               }
-              heart.classList.add('heart-none');
-              heartActive.classList.add('heart2-active');
+              heart.classList.add("heart-none");
+              heartActive.classList.add("heart2-active");
             })
-            .catch(err => console.error(err));
+            .catch((err) => console.error(err));
         }
       });
 
-      heartActive.addEventListener('click', () => {
+      heartActive.addEventListener("click", () => {
         if (good.favourite) {
-          heart.classList.remove('heart-none');
-          heartActive.classList.remove('heart2-active');
+          heart.classList.remove("heart-none");
+          heartActive.classList.remove("heart2-active");
           good.favourite = false;
 
           fetch(`${baseURL}/${good.id}`, {
-            method: 'PATCH',
+            method: "PATCH",
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({ favourite: false })
+            body: JSON.stringify({ favourite: false }),
           })
-            .then(res => {
+            .then((res) => {
               if (!res.ok) {
-                throw new Error('Failed to update favourite');
+                throw new Error("Failed to update favourite");
               }
-              heart.classList.remove('heart-none');
-              heartActive.classList.remove('heart2-active');
+              heart.classList.remove("heart-none");
+              heartActive.classList.remove("heart2-active");
             })
-            .catch(err => console.error(err));
+            .catch((err) => console.error(err));
         }
       });
-
-
 
       fetch(`${baseURL}/${good.id}`)
         .then(res => res.json())
@@ -115,5 +112,20 @@ fetch(baseURL)
 
       cards.append(cardDiv);
     });
+
+
+    if (favouriteGoods.length === 0) {
+      let izbranoe = document.querySelector(".izbranoe")
+      const hearts = document.querySelector(".hearts");
+      const zagolovok = document.querySelector(".add");
+      const text = document.querySelector(".text");
+    
+      izbranoe.classList.replace("izbranoe", "izbranoe-none");
+      hearts.classList.replace("hearts", "hearts-active");
+      zagolovok.classList.replace("add", "add-active");
+      text.classList.replace("text", "text-active");
+      
+    }
+    
   })
   .catch(err => console.error(err));

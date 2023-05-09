@@ -40,7 +40,7 @@ export function header() {
   right_side.classList.add("right_side");
   userDiv.classList.add("userDiv");
 
-  userHref.href = "/pages/tovar.html"
+  userHref.href = ""
   favouriteHref.href = "/pages/favorite.html"
   logoHref.href = "/index.html"
   userBtn.innerHTML = 'Шахзод'
@@ -64,118 +64,42 @@ export function header() {
   let list = document.querySelector('.spisok');
   let inputSearch = document.querySelector(".elastic");
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Предотвращаем перезагрузку страницы при отправке формы
-    const inputValue = inputSearch.value.trim().toLowerCase();
-    searchReload(inputValue);
-  });
-
-
-  const searchProducts = async (query) => {
-    try {
-      const response = await fetch(`${baseURL}?q=${query}`);
-      const data = await response.json();
-      return data.results || []; // Return an empty array if `data.results` is falsy
-    } catch (error) {
-      console.error('Error searching products:', error);
-      return [];
-    }
-  };
-
-  const displaySearchResults = (results) => {
+  function updateList(searchText) {
     list.innerHTML = "";
-    
-    if (results.length > 0) {
-      for (let item of results) {
-        let title = item.title;
-        let highlightedTitle = getHighlightedTitle(title);
-
-        list.innerHTML += `
-          <a href="./productid.html?id=${item.id}">
-            <div class="item">
-              <span>${highlightedTitle}</span>
-              <abbr title="hello brat"></abbr>
-            </div>
-          </a>
-        `;
-      }
-    } else {
-      list.style.display = "none";
-    }
-  };
-
-  const getHighlightedTitle = (title) => {
-    const inputValue = inputSearch.value.trim().toLowerCase();
-    const regex = new RegExp(inputValue, "gi");
-    return title.replace(regex, (match) => `<b>${match}</b>`);
-  };
-
-  const searchReload = async (val) => {
-    list.innerHTML = "";
-
-    if (val.length > 0) {
-      try {
-        const results = await searchProducts(val);
-        displaySearchResults(results);
-      } catch (error) {
-        console.error('Error searching products:', error);
-      }
-    } else {
-      list.style.display = "none";
-    }
-  };
-
-  inputSearch.oninput = () => {
-    let val = inputSearch.value.toLowerCase().trim();
-    list.style.display = val.length > 0 ? "flex" : "none";
-    searchReload(val);
-  };
-
-  // Получите кнопку поиска из разметки
-  const searchButton = document.querySelector('.def-btn');
-
-  // Добавьте обработчик события клика на кнопку поиска
-  searchButton.addEventListener('click', () => {
-    const inputValue = inputSearch.value.trim().toLowerCase();
-    searchReload(inputValue);
-  });
-
-  // Добавьте обработчик события нажатия клавиши на поле ввода
-  inputSearch.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      const inputValue = inputSearch.value.trim().toLowerCase();
-      searchReload(inputValue);
-    }
-  });
-
-  // Добавьте обработчик события фокуса на поле ввода
-  inputSearch.addEventListener('focus', () => {
-    let val = inputSearch.value.toLowerCase().trim();
-    list.style.display = val.length > 0 ? "flex" : "none";
-    searchReload(val);
-  });
-
-  // Добавьте обработчик события клика на весь документ
-  document.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!target.closest('.middle')) {
-      list.style.display = "none";
-    }
-  });
-
-  // Обновите обработчик события input на поле ввода
-  inputSearch.oninput = () => {
-    let val = inputSearch.value.toLowerCase().trim();
-    list.style.display = val.length > 0 ? "flex" : "none";
   
-    if (val.length >= 3) {
-      searchReload(val);
-    } else {
-      list.innerHTML = "";
-    }
-  };
+    const similarGoods = elasticItems.filter((good) => good.title.toLowerCase().includes(searchText.toLowerCase())).slice(0, 3);
+    similarGoods.forEach((good) => {
+      const listItem = document.createElement("div");
+      listItem.classList.add("item");
+      const title = good.title;
+      const markedText = title.replace(new RegExp(searchText, "gi"), '<mark class="marked-text">$&</mark>');
+      listItem.innerHTML = markedText;
+      listItem.setAttribute("data-id", good.id);
+      list.appendChild(listItem);
+    });
+  }
+  
+
+inputSearch.addEventListener("input", (event) => {
+  const searchText = event.target.value;
+  updateList(searchText);
+});
+
+list.addEventListener("click", (event) => {
+  const listItem = event.target;
+  if (listItem.tagName === "DIV" && listItem.classList.contains("item")) {
+    const goodId = listItem.getAttribute("data-id");
+    window.location.href = `/pages/tovar.html?id=${goodId}`;
+  }
+});
+
+
+fetch(baseURL)
+  .then(res => res.json())
+  .then(data => {
+    elasticItems = data;
+  })
+  .catch(error => console.error(error));
 }
 
-
-header()
+header();

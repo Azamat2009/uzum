@@ -2,7 +2,7 @@
   "goods": [
     {
       "id": 1,
-      "favourite": true,
+      "favourite": false,
       "title": "Кресло компьютерное игровое Cougar ARMOR One Black-Orange",
       "description": "Cougar Armor One — игровое компьютерное кресло с высокой спинкой, поддерживающей позвоночник в анатомически правильном положении. Обивка сделана из воздухопроницаемой экокожи. В комплекте есть подушки для шеи и поясницы. За счет стального каркаса эта модель выдерживает нагрузку до 120 кг. Стул оснащен механизмом регулировки высоты «Газлифт». Металлический кожух защищает его от преждевременной поломки. Специальные ручки предназначены для настройки степени сопротивления к раскачиванию и его полной блокировки. Конструкция раскладывается на 180°. Подлокотники поворачиваются вправо и влево, их можно поднимать и опускать.",
       "colors": [
@@ -20,7 +20,7 @@
     },
     {
       "id": 2,
-      "favourite": true,
+      "favourite": false,
       "title": "Кресло компьютерное игровое Red Square Pro Pure Black (RSQ-50020)",
       "description": "Кресло компьютерное игровое Red Square Pro Pure Black (RSQ-50020)",
       "colors": [
@@ -197,7 +197,7 @@
     },
     {
       "id": 12,
-      "favourite": true,
+      "favourite": false,
       "title": "Системный блок игровой Raskat STRIKE 920 105611 (i9-12900F/32GB/2TB+2TB/RTX3090Ti/W10)",
       "description": "Системный блок Raskat Strike 920 на операционной системе Windows 10 основан на материнской плате, совместимой с процессором Intel Core i9 12900F с рабочей тактовой частотой 2,4 ГГц. Дискретная видеокарта GeForce RTX 3090Ti с объемом памяти GDDR6Х 24 Гб открывает доступ к требовательным играм и графическим приложениям, оперативная память Ram 32 Гб, накопители SSD объемом 2 Тб и HDD емкостью 2 Тб",
       "colors": [
@@ -466,7 +466,7 @@
         "https://img.mvideo.ru/Big/10022400bb2.jpg"
       ],
       "type": "audio",
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 27,
@@ -482,7 +482,8 @@
       "media": [
         "https://img.mvideo.ru/Big/10028676bb.jpg"
       ],
-      "type": "audio"
+      "type": "audio",
+      "favourite": false
     },
     {
       "id": 28,
@@ -859,7 +860,7 @@
       "rating": 4.8,
       "price": 12999,
       "isBlackFriday": true,
-      "salePercentage": 0,
+      "salePercentage": 10,
       "media": [
         "https://img.mvideo.ru/Big/20044905bb.jpg",
         "https://img.mvideo.ru/Big/small_pic/80/20044905bb1.jpg",
@@ -964,118 +965,6 @@
         "https://img.mvideo.ru/Big/20063431bb12.jpg"
       ],
       "type": "kitchen"
-    },
-    {
-      "favourite": true,
-      "id": 41
-    },
-    {
-      "favourite": true,
-      "id": 42
-    },
-    {
-      "favourite": true,
-      "id": 43
-    },
-    {
-      "favourite": true,
-      "id": 44
-    },
-    {
-      "favourite": true,
-      "id": 45
-    },
-    {
-      "favourite": true,
-      "id": 46
-    },
-    {
-      "favourite": true,
-      "id": 47
-    },
-    {
-      "favourite": true,
-      "id": 48
-    },
-    {
-      "favourite": true,
-      "id": 49
-    },
-    {
-      "favourite": false,
-      "id": 50
-    },
-    {
-      "favourite": true,
-      "id": 51
-    },
-    {
-      "favourite": false,
-      "id": 52
-    },
-    {
-      "favourite": true,
-      "id": 53
-    },
-    {
-      "favourite": false,
-      "id": 54
-    },
-    {
-      "favourite": true,
-      "id": 55
-    },
-    {
-      "favourite": false,
-      "id": 56
-    },
-    {
-      "favourite": true,
-      "id": 57
-    },
-    {
-      "favourite": false,
-      "id": 58
-    },
-    {
-      "favourite": true,
-      "id": 59
-    },
-    {
-      "favourite": false,
-      "id": 60
-    },
-    {
-      "favourite": true,
-      "id": 61
-    },
-    {
-      "favourite": false,
-      "id": 62
-    },
-    {
-      "favourite": true,
-      "id": 63
-    },
-    {
-      "favourite": false,
-      "id": 64
-    },
-    {
-      "favourite": true,
-      "id": 65
-    },
-    {
-      "favourite": false,
-      "id": 66
-    },
-    {
-      "favourite": true,
-      "id": 67
-    },
-    {
-      "favourite": false,
-      "id": 68
     }
   ]
 }

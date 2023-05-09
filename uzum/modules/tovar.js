@@ -6,6 +6,12 @@ fetch(baseURL + id)
     .then(user => {
         user = user[0]
 
+        let scren = document.querySelectorAll(".scren")
+        scren.src = user.media[0]
+        let slider = document.querySelectorAll(".hi")
+        slider[0].src = user.media[0]
+        slider[1].src = user.media[1]
+
 
         let app = document.querySelector(".tovar-right")
         let tovarBottomDiv = document.querySelector(".tovar-bottom")
@@ -95,6 +101,128 @@ fetch(baseURL + id)
 
         app.appendChild(tovarFlex);
         tovarBottomDiv.appendChild(tovarBottom);
+
+        let cards = document.querySelector('.cards')
+        let type = user.type;
+
+
+        fetch(baseURL)
+          .then(res => res.json())
+          .then(goods => {
+            const similarGoods = goods.filter(good => good.type === type).slice(0, 5);
+    
+            similarGoods.forEach(good => {
+
+              const cardDiv = document.createElement("div");
+              const img1 = document.createElement("img");
+              let productPage = document.createElement("a")
+              const heart = document.createElement("img");
+              const heartActive = document.createElement("img");
+              const h3 = document.createElement("h3");
+              const beforeSale = document.createElement("span");
+              const bottomCardDiv = document.createElement("div");
+              const span2 = document.createElement("span");
+              const img4 = document.createElement("img");
+              cardDiv.classList.add("card");
+              img1.classList.add("productImage")
+              beforeSale.classList.add("before-sale");
+              heart.classList.add("heart")
+              heartActive.classList.add("heart2")
+              bottomCardDiv.classList.add("bottom-card");
+    
+              productPage.href = `/pages/tovar.html?id=${good.id}`
+              heart.src = "/public/icons/heart.svg";
+              heart.alt = "";
+              heartActive.src = "/public/icons/heart 1.png";
+              heartActive.alt = "";
+              h3.innerHTML = good.title;
+              span2.textContent = good.price;
+              beforeSale.textContent = good.price + " сум"
+              img1.src = good.media[0];
+              img4.id = "cardImg";
+              img4.src = "/public/icons/card.svg";
+              img4.alt = "";
+    
+              bottomCardDiv.appendChild(span2);
+              bottomCardDiv.appendChild(img4);
+              productPage.append(img1)
+              cardDiv.appendChild(productPage);
+              cardDiv.appendChild(heart);
+              cardDiv.appendChild(heartActive);
+              cardDiv.appendChild(h3);
+              cardDiv.appendChild(beforeSale);
+              cardDiv.appendChild(bottomCardDiv);
+    
+              if (good.favourite) {
+                heart.classList.add('heart-none');
+                heartActive.classList.add('heart2-active');
+              } else {
+                heart.classList.remove('heart-none');
+                heartActive.classList.remove('heart2-active');
+              }
+        
+              heart.addEventListener('click', () => {
+                if (!good.favourite) {
+                  heart.classList.add('heart-none');
+                  heartActive.classList.add('heart2-active');
+                  good.favourite = true;
+        
+                  fetch(`${baseURL}/${good.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ favourite: true })
+                  })
+                    .then(res => {
+                      if (!res.ok) {
+                        throw new Error('Failed to update favourite');
+                      }
+                      heart.classList.add('heart-none');
+                      heartActive.classList.add('heart2-active');
+                    })
+                    .catch(err => console.error(err));
+                }
+              });
+        
+              heartActive.addEventListener('click', () => {
+                if (good.favourite) {
+                  heart.classList.remove('heart-none');
+                  heartActive.classList.remove('heart2-active');
+                  good.favourite = false;
+        
+                  fetch(`${baseURL}/${good.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ favourite: false })
+                  })
+                    .then(res => {
+                      if (!res.ok) {
+                        throw new Error('Failed to update favourite');
+                      }
+                      heart.classList.remove('heart-none');
+                      heartActive.classList.remove('heart2-active');
+                    })
+                    .catch(err => console.error(err));
+                }
+              });
+        
+        
+        
+              fetch(`${baseURL}/${good.id}`)
+                .then(res => res.json())
+                .then(data => {
+                  const newPrice = good.price * (100 - data.salePercentage) / 100;
+                  span2.textContent = newPrice.toFixed(0) + " сум";
+                })
+                .catch(err => console.error(err));
+        
+              cards.append(cardDiv);
+            });
+          })
+          .catch(err => console.error(err));
 })
 
 
@@ -127,77 +255,6 @@ right.append(countSpan);
 right.append(plusBtn);
 
 
-// похожие товары
-
-let cards = document.querySelector(".cards")
-fetch(baseURL)
-    .then(res => res.json())
-    .then(goods => {
-        goods.slice(40, 45).forEach(good => {
-            const cardDiv = document.createElement("div");
-            cardDiv.classList.add("card");
-
-
-            const img1 = document.createElement("img");
-            img1.src = good.media[0];
-            img1.classList.add("productImage")
-
-            let productPage = document.createElement("a")
-            productPage.href = "/pages/tovar.html"
-            productPage.append(img1)
-
-            const img2 = document.createElement("img");
-            img2.classList.add("heart");
-            img2.src = "/public/icons/heart.svg";
-            img2.alt = "";
-
-            const img3 = document.createElement("img");
-            img3.classList.add("heart2");
-            img3.src = "/public/icons/heart 1.png";
-            img3.alt = "";
-
-            const h3 = document.createElement("h3");
-            h3.innerHTML = good.title;
-
-            const beforeSale = document.createElement("span");
-            beforeSale.classList.add("before-sale");
-            beforeSale.textContent = good.price + " сум"
-
-            const bottomCardDiv = document.createElement("div");
-            bottomCardDiv.classList.add("bottom-card");
-
-            const span2 = document.createElement("span");
-            span2.textContent = good.price;
-
-            const img4 = document.createElement("img");
-            img4.id = "cardImg";
-            img4.src = "/public/icons/card.svg";
-            img4.alt = "";
-
-            bottomCardDiv.appendChild(span2);
-            bottomCardDiv.appendChild(img4);
-
-            cardDiv.appendChild(productPage);
-            cardDiv.appendChild(img2);
-            cardDiv.appendChild(img3);
-            cardDiv.appendChild(h3);
-            cardDiv.appendChild(beforeSale);
-            cardDiv.appendChild(bottomCardDiv);
-
-            fetch(`${baseURL}/${good.id}`)
-                .then(res => res.json())
-                .then(data => {
-                    const newPrice = good.price * (100 - data.salePercentage) / 100;
-                    span2.textContent = newPrice.toFixed(0) + " сум"; 
-                })
-                .catch(err => console.error(err));
-
-            cards.append(cardDiv);
-        });
-    })
-    .catch(err => console.error(err));
-
-
 
 //slide to top
 const backToTopBtn = document.querySelector('#back-to-top-btn');
@@ -211,9 +268,9 @@ window.addEventListener('scroll', () => {
   }
 
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-    backToTopBtn.style.bottom = '80px'; // измените значение, если нужно
+    backToTopBtn.style.bottom = '80px';
   } else {
-    backToTopBtn.style.bottom = '20px'; // измените значение, если нужно
+    backToTopBtn.style.bottom = '20px';
   }
 });
 

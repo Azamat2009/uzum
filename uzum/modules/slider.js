@@ -22,13 +22,11 @@ function Sim(sldrId) {
 };
 
 Sim.defaults = {
-
-	// Default options for the carousel
-	loop: true,     // Бесконечное зацикливание слайдера
-	auto: true,     // Автоматическое пролистывание
-	interval: 5000, // Интервал между пролистыванием элементов (мс)
-	arrows: true,   // Пролистывание стрелками
-	dots: true      // Индикаторные точки
+	loop: true,    
+	auto: true,   
+	interval: 5000, 
+	arrows: true,   
+	dots: true      
 };
 
 Sim.prototype.elemPrev = function(num) {
@@ -85,14 +83,11 @@ Sim.prototype.dotOff = function(num) {
 
 Sim.initialize = function(that) {
 
-	// Constants
-	that.elemCount = that.sldrElements.length; // Количество элементов
+	that.elemCount = that.sldrElements.length;
 
-	// Variables
 	that.currentElement = 0;
 	let bgTime = getTime();
 
-	// Functions
 	function getTime() {
 		return new Date().getTime();
 	};
@@ -105,27 +100,26 @@ Sim.initialize = function(that) {
 		}, that.options.interval)
 	};
 
-	// Start initialization
-	if(that.elemCount <= 1) {   // Отключить навигацию
+	if(that.elemCount <= 1) { 
 		that.options.auto = false; that.options.arrows = false; that.options.dots = false;
 		that.leftArrow.style.display = 'none'; that.rightArrow.style.display = 'none'
 	};
-	if(that.elemCount >= 1) {   // показать первый элемент
+	if(that.elemCount >= 1) { 
 		that.sldrElemFirst.style.opacity = '1';
 	};
 
 	if(!that.options.loop) {
-		that.leftArrow.style.display = 'none';  // отключить левую стрелку
-		that.options.auto = false; // отключить автопркрутку
+		that.leftArrow.style.display = 'none';
+		that.options.auto = false;
 	}
-	else if(that.options.auto) {   // инициализация автопрокруки
+	else if(that.options.auto) {   
 		setAutoScroll();
-		// Остановка прокрутки при наведении мыши на элемент
+
 		that.sldrList.addEventListener('mouseenter', function() {clearInterval(that.autoScroll)}, false);
 		that.sldrList.addEventListener('mouseleave', setAutoScroll, false)
 	};
 
-	if(that.options.arrows) {  // инициализация стрелок
+	if(that.options.arrows) { 
 		that.leftArrow.addEventListener('click', function() {
 			let fnTime = getTime();
 			if(fnTime - bgTime > 1000) {
@@ -143,14 +137,13 @@ Sim.initialize = function(that) {
 		that.leftArrow.style.display = 'none'; that.rightArrow.style.display = 'none'
 	};
 
-	if(that.options.dots) {  // инициализация индикаторных точек
+	if(that.options.dots) {  
 		let sum = '', diffNum;
 		for(let i=0; i<that.elemCount; i++) {
 			sum += '<span class="sim-dot"></span>'
 		};
 		that.indicatorDots.innerHTML = sum;
 		that.indicatorDotsAll = that.sldrRoot.querySelectorAll('span.sim-dot');
-		// Назначаем точкам обработчик события 'click'
 		for(let n=0; n<that.elemCount; n++) {
 			that.indicatorDotsAll[n].addEventListener('click', function() {
 				diffNum = Math.abs(n - that.currentElement);
@@ -160,10 +153,9 @@ Sim.initialize = function(that) {
 				else if(n > that.currentElement) {
 					bgTime = getTime(); that.elemNext(diffNum)
 				}
-				// Если n == that.currentElement ничего не делаем
 			}, false)
 		};
-		that.dotOff(0);  // точка[0] выключена, остальные включены
+		that.dotOff(0); 
 		for(let i=1; i<that.elemCount; i++) {
 			that.dotOn(i)
 		}
