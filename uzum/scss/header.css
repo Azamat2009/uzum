@@ -87,9 +87,9 @@
   justify-content: space-between;
   gap: 5px;
   border: 1px solid rgba(51, 51, 51, 0.2);
-  padding: 7px 10px;
+  padding: 0px 10px;
   border-radius: 4px;
-  max-height: 50px;
+  max-height: 35px;
 }
 .header .middle form .elastic {
   all: unset;
@@ -99,7 +99,7 @@
   outline: none;
   font-size: 13px;
   font-weight: 500;
-  transform: translate(0px, 2px);
+  transform: translate(0px, 7px);
   margin-top: 2px;
   line-height: 16px;
 }
@@ -118,7 +118,7 @@
 .header .middle form button {
   all: unset;
   position: absolute;
-  transform: translate(200px, 2px);
+  transform: translate(200px, 8px);
 }
 .header .middle form img {
   width: 15px;
@@ -128,55 +128,6 @@
 .header .userDiv {
   display: flex;
   gap: 10px;
-}
-
-.modal {
-  display: none;
-  width: 600px;
-  height: 330px;
-  background: #80c7eb;
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 0;
-  transition: 1s ease;
-  padding-top: 25px;
-  padding-left: 30px;
-}
-.modal h2 {
-  font-size: 30px;
-  color: white;
-  font-family: sans-serif;
-}
-.modal .btns {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 210px;
-  margin-right: 40px;
-}
-.modal .btnOut {
-  all: unset;
-  padding: 10px 45px;
-  text-align: center;
-  background-color: blue;
-  color: white;
-  font-size: 20px;
-  font-family: sans-serif;
-  cursor: pointer;
-}
-.modal .btnExit {
-  all: unset;
-  padding: 10px 45px;
-  text-align: center;
-  background-color: red;
-  color: white;
-  font-size: 20px;
-  font-family: sans-serif;
-  margin-left: 20px;
-  cursor: pointer;
 }
 
 .item {

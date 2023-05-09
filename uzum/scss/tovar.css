@@ -10,6 +10,7 @@
 .sim-slider img {
   width: 100%;
   background-size: contain;
+  margin-top: 50px;
 }
 
 /* General styles */
@@ -97,6 +98,10 @@ span.sim-dot {
   gap: 60px;
   max-width: 1920px;
   width: 85%;
+}
+.tovar-flex .sim-slider-list img {
+  position: sticky;
+  top: 0px;
 }
 .tovar-flex .prices {
   display: flex;
@@ -204,7 +209,7 @@ span.sim-dot {
   width: 60%;
   position: relative;
   margin: 0 auto;
-  margin-right: 360px;
+  margin-right: 300px;
 }
 .tovar-bottom p {
   margin-top: 10px;

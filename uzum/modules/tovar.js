@@ -11,7 +11,8 @@ fetch(baseURL + id)
         let slider = document.querySelectorAll(".hi")
         slider[0].src = user.media[0]
         slider[1].src = user.media[1]
-
+        slider[2].src = user.media[2]
+        slider[3].src = user.media[3]
 
         let app = document.querySelector(".tovar-right")
         let tovarBottomDiv = document.querySelector(".tovar-bottom")

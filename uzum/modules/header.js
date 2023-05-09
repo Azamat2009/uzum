@@ -47,10 +47,13 @@ export function header() {
   favouriteBtn.innerHTML = 'Избранное'
   favouriteBtn.href = "/pages/tovar.html"
   cardBtn.innerHTML = 'Корзина'
+  cardHref.href = "/pages/card.html"
   katalog.innerHTML = "Каталог"
   logo.src = "/public/img/logo.png";
   userLogo.src = "/public/icons/user.svg";
 
+  
+  cardHref.append(cardBtn)
   userHref.append(userDiv)
   favouriteHref.append(favouriteBtn)
   logoHref.append(logo)
@@ -58,7 +61,7 @@ export function header() {
   header.append(left_side, middle, right_side);
   left_side.append(logoHref, katalog);
   userDiv.append(userLogo, userBtn)
-  right_side.append(userHref, favouriteHref, cardBtn);
+  right_side.append(userHref, favouriteHref, cardHref);
   middle.append(form)
 
   let list = document.querySelector('.spisok');
