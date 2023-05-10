@@ -1,7 +1,7 @@
-let baseURL = "http://localhost:3000/goods"
-let cards = document.querySelector('.cards')
-let cards2 = document.querySelector('.cards2')
-let cards3 = document.querySelector('.cards3')
+let baseURL = "http://localhost:3000/goods";
+let cards = document.querySelector('.cards');
+let cards2 = document.querySelector('.cards2');
+let cards3 = document.querySelector('.cards3');
 
 fetch(baseURL)
   .then(res => res.json())
@@ -9,7 +9,7 @@ fetch(baseURL)
     goods.slice(0, 15).forEach(good => {
       const cardDiv = document.createElement("div");
       const img1 = document.createElement("img");
-      let productPage = document.createElement("a")
+      let productPage = document.createElement("a");
       const heart = document.createElement("img");
       const heartActive = document.createElement("img");
       const h3 = document.createElement("h3");
@@ -18,20 +18,20 @@ fetch(baseURL)
       const span2 = document.createElement("span");
       const img4 = document.createElement("img");
       cardDiv.classList.add("card");
-      img1.classList.add("productImage")
+      img1.classList.add("productImage");
       beforeSale.classList.add("before-sale");
-      heart.classList.add("heart")
-      heartActive.classList.add("heart2")
+      heart.classList.add("heart");
+      heartActive.classList.add("heart2");
       bottomCardDiv.classList.add("bottom-card");
 
-      productPage.href = `/pages/tovar.html?id=${good.id}`
+      productPage.href = `/pages/tovar.html?id=${good.id}`;
       heart.src = "/public/icons/heart.svg";
       heart.alt = "";
       heartActive.src = "/public/icons/heart 1.png";
       heartActive.alt = "";
       h3.innerHTML = good.title;
       span2.textContent = good.price;
-      beforeSale.textContent = good.price + " сум"
+      beforeSale.textContent = good.price + " сум";
       img1.src = good.media[0];
       img4.id = "cardImg";
       img4.src = "/public/icons/card.svg";
@@ -39,7 +39,7 @@ fetch(baseURL)
 
       bottomCardDiv.appendChild(span2);
       bottomCardDiv.appendChild(img4);
-      productPage.append(img1)
+      productPage.append(img1);
       cardDiv.appendChild(productPage);
       cardDiv.appendChild(heart);
       cardDiv.appendChild(heartActive);
@@ -96,12 +96,24 @@ fetch(baseURL)
               if (!res.ok) {
                 throw new Error('Failed to update favourite');
               }
+
               heart.classList.remove('heart-none');
               heartActive.classList.remove('heart2-active');
-            })
-            .catch(err => console.error(err));
-        }
-      });
+              })
+              .catch(err => console.error(err));
+              }
+              });
+              
+              img4.addEventListener('click', () => {
+              localStorage.setItem('selectedProduct', JSON.stringify(good));
+              });
+              
+              const savedProduct = localStorage.getItem('selectedProduct');
+              if (savedProduct) {
+              const selectedProduct = JSON.parse(savedProduct);
+              }
+              
+          
 
 
 
