@@ -2,6 +2,7 @@ let baseURL = "http://localhost:3000/goods";
 let cards = document.querySelector('.cards');
 let cards2 = document.querySelector('.cards2');
 let cards3 = document.querySelector('.cards3');
+let selectedProducts = [];
 
 fetch(baseURL)
   .then(res => res.json())
@@ -105,7 +106,8 @@ fetch(baseURL)
               });
               
               img4.addEventListener('click', () => {
-              localStorage.setItem('selectedProduct', JSON.stringify(good));
+                selectedProducts.push(good);
+                localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
               });
               
               const savedProduct = localStorage.getItem('selectedProduct');

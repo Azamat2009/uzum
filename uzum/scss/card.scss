@@ -71,6 +71,7 @@ center {
 .card-flex {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 
     .left {
         display: flex;
@@ -94,6 +95,7 @@ center {
 
             .right-card {
                 display: flex;
+                position: sticky;
                 flex-direction: column;
                 gap: 5px;
 

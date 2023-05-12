@@ -75,6 +75,7 @@ center a {
 .card-flex {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 .card-flex .left {
   display: flex;
@@ -95,6 +96,7 @@ center a {
 }
 .card-flex .left .product-card .right-card {
   display: flex;
+  position: sticky;
   flex-direction: column;
   gap: 5px;
 }
