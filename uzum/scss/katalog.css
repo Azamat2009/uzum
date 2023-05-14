@@ -65,12 +65,12 @@ hr {
 .main .left .menu ul li:hover {
   text-decoration: underline;
 }
-.main .cards {
+.main .cards, .main .product-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
-.main .cards .card {
+.main .cards .card, .main .product-list .card {
   display: flex;
   cursor: pointer;
   gap: 10px;
@@ -78,32 +78,32 @@ hr {
   width: 230px;
   overflow: hidden;
 }
-.main .cards .card .heart {
+.main .cards .card .heart, .main .product-list .card .heart {
   position: absolute;
   transform: translate(200px, 0px);
 }
-.main .cards .card .heart-none {
+.main .cards .card .heart-none, .main .product-list .card .heart-none {
   position: absolute;
   display: none;
   transform: translate(200px, 0px);
 }
-.main .cards .card .heart2 {
+.main .cards .card .heart2, .main .product-list .card .heart2 {
   position: absolute;
   transform: translate(200px, 0px);
   display: none;
 }
-.main .cards .card .heart2-active {
+.main .cards .card .heart2-active, .main .product-list .card .heart2-active {
   position: absolute;
   transform: translate(200px, 0px);
   display: block;
 }
-.main .cards .productImage {
+.main .cards .productImage, .main .product-list .productImage {
   background-size: contain;
   height: 180px;
 }
 
 .range {
-  width: 90%;
+  width: 92%;
   height: 5px;
   border-radius: 50px;
   background-color: #7000FF;

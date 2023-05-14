@@ -78,7 +78,7 @@
         "black"
       ],
       "rating": 3.9,
-      "price": 94199,
+      "price": 999,
       "isBlackFriday": false,
       "salePercentage": 0,
       "media": [
@@ -212,7 +212,7 @@
     {
       "user_id": 1,
       "id": 9,
-      "favourite": false,
+      "favourite": true,
       "title": "Кресло компьютерное игровое Canyon Corax (CND-SGCH5)",
       "description": "Компьютерное игровое кресло Canyon Corax представляет собой сочетание стильного дизайна и безупречного комфорта. Садись в него и отправляйся навстречу приключениям!",
       "colors": [

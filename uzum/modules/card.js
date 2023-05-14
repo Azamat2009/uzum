@@ -2,8 +2,9 @@ import axios from "axios";
 let baseURL = "http://localhost:3000/goods";
 let totalItemCount = 0;
 let totalSaleAmount = 0;
-const reloadCartItems = (arr, place) => {
-  let totalPrice = 0; 
+let totalPrice = 0;
+
+const reloadCartItems = () => {
   let container = document.querySelector('.left');
 
   const savedProducts = localStorage.getItem('selectedProducts');
@@ -11,6 +12,8 @@ const reloadCartItems = (arr, place) => {
     const selectedProducts = JSON.parse(savedProducts);
 
     if (selectedProducts.length === 0) {
+      let app = document.getElementById("app");
+      app.style.display = 'none';
       let cat = document.querySelector(".cat");
       const h1 = document.querySelector(".text-inactive");
       const p = document.querySelector(".p-inactive");
@@ -25,7 +28,6 @@ const reloadCartItems = (arr, place) => {
     let totalMoney = document.getElementById("total");
     let totalTovar = document.getElementById("total-tovar");
     let totalSale = document.getElementById("total-sale");
-
 
     selectedProducts.forEach(selectedProduct => {
       let count = 0;
@@ -86,6 +88,9 @@ const reloadCartItems = (arr, place) => {
           price.innerHTML = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
           totalPrice += newPrice * count;
 
+          totalSaleAmount += selectedProduct.price - newPrice;
+          console.log(totalSaleAmount);
+
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete');
           deleteButton.innerHTML = 'Удалить';
@@ -95,6 +100,7 @@ const reloadCartItems = (arr, place) => {
           productCard.append(leftCard);
           productCard.appendChild(rightCard);
           container.appendChild(productCard);
+
 
           heading.innerHTML = selectedProduct.title;
           image.src = selectedProduct.media[0];
@@ -106,6 +112,22 @@ const reloadCartItems = (arr, place) => {
               const selectedProducts = JSON.parse(savedProducts);
               const updatedProducts = selectedProducts.filter(product => product.id !== selectedProduct.id);
               localStorage.setItem('selectedProducts', JSON.stringify(updatedProducts));
+
+              totalPrice = updatedProducts.reduce((total, product) => {
+                const newPrice = Math.floor(product.price * (100 - data.salePercentage) / 100);
+                return total + newPrice;
+              }, 0);
+              totalItemCount = updatedProducts.length;
+
+              totalSaleAmount = updatedProducts.reduce((total, product) => {
+                const originalPrice = product.price * product.count;
+                const discountedPrice = totalPrice * product.count;
+                return total + (originalPrice - discountedPrice);
+              }, 0);
+
+              totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+              totalTovar.textContent = "Итого товаров: " + totalItemCount;
+              totalSale.textContent = "Итого скидки: " + totalSaleAmount;
             }
 
             productCard.remove();
@@ -116,19 +138,12 @@ const reloadCartItems = (arr, place) => {
             countSpan.textContent = count;
             totalPrice += newPrice;
             totalItemCount++;
+            totalSaleAmount += selectedProduct.price - newPrice; 
             localStorage.setItem('totalPrice', totalPrice);
             localStorage.setItem('totalItemCount', totalItemCount);
             totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
             totalTovar.textContent = "Итого товаров: " + totalItemCount;
-            if (savedProducts.salePercentage > 0 ) {
-              totalSaleAmount = Math.floor(savedProducts.price * (100 - savedProducts.salePercentage) / 100);
-              // selectedProduct.price * (data.salePercentage / 100); 
-            } else {
-              totalSaleAmount = selectedProduct.price
-            }
-            console.log(totalSaleAmount);
-            console.log(JSON.stringify(savedProducts.price));
-            console.log(savedProducts.salePercentage);
+            totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
           });
 
           minusBtn.addEventListener("click", () => {
@@ -137,36 +152,23 @@ const reloadCartItems = (arr, place) => {
               countSpan.textContent = count;
               totalPrice -= newPrice;
               totalItemCount--;
+              totalSaleAmount -= selectedProduct.price - newPrice;
               localStorage.setItem('totalPrice', totalPrice);
               localStorage.setItem('totalItemCount', totalItemCount);
               totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
               totalTovar.textContent = "Итого товаров: " + totalItemCount;
+              totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
             }
           });
 
-          totalSale.innerHTML = totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
         })
         .catch(err => console.error(err));
     });
 
+
     totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
     totalTovar.textContent = "Итого товаров: " + totalItemCount;
-
-    totalSaleAmount = totalMoney
-  } else {
-    let cardFlex = document.querySelector(".card-flex");
-    let zagolovok = document.querySelector("h1");
-    zagolovok.style.display = "none";
-    cardFlex.style.display = "none";
-    let cat = document.querySelector(".cat");
-    const h1 = document.querySelector(".text-inactive");
-    const p = document.querySelector(".p-inactive");
-    const a = document.querySelector(".a-inactive");
-
-    cat.classList.replace("cat", "cat-active");
-    h1.classList.replace("text-inactive", "text-active");
-    p.classList.replace("p-inactive", "p-active");
-    a.classList.replace("a-inactive", "a-active");
+    totalSale.textContent = "Итого скидки: " + totalSaleAmount;
   }
 };
 
