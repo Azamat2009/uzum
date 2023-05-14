@@ -108,8 +108,11 @@ export function createGoods() {
               });
               
               img4.addEventListener('click', () => {
-                selectedProducts.push(good);
-                localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+                const isProductSelected = selectedProducts.some(product => product.id === good.id);
+                if (!isProductSelected) {
+                  selectedProducts.push(good);
+                  localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+                }
               });
       
               const savedProducts = localStorage.getItem('selectedProducts');

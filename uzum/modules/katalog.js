@@ -1,11 +1,14 @@
 let baseURL = "http://localhost:3000/goods";
-let cards = document.querySelector('.cards');
+let cards = document.querySelectorAll(".cards")
 let selectedProducts = [];
-fetch(baseURL)
+
+
+export function createGoods() {
+  fetch(baseURL)
   .then(res => res.json())
   .then(goods => {
-    const favouriteGoods = goods.filter(good => good.favourite === true);
-    favouriteGoods.forEach(good => {
+    let baseURL = "http://localhost:3000/goods";
+    goods.forEach(good => {
       const cardDiv = document.createElement("div");
       const img1 = document.createElement("img");
       let productPage = document.createElement("a");
@@ -125,22 +128,83 @@ fetch(baseURL)
           span2.textContent = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
         })
         .catch(err => console.error(err));
-      cards.append(cardDiv);
+
+      cards[0].append(cardDiv);
     });
-
-
-    if (favouriteGoods.length === 0) {
-      let izbranoe = document.querySelector(".izbranoe")
-      const hearts = document.querySelector(".hearts");
-      const zagolovok = document.querySelector(".add");
-      const text = document.querySelector(".text");
-    
-      izbranoe.classList.replace("izbranoe", "izbranoe-none");
-      hearts.classList.replace("hearts", "hearts-active");
-      zagolovok.classList.replace("add", "add-active");
-      text.classList.replace("text", "text-active");
-      
-    }
-    
   })
   .catch(err => console.error(err));
+}
+
+createGoods()
+
+document.getElementById("budget").oninput = function () {
+    var value = ((this.value - this.min) / (this.max - this.min)) * 100;
+    this.style.background = "linear-gradient(to right, #7000FF 0%, #7000FF " + value + "%, #ffff " + value + "%, #7000FF 100%)";
+};
+
+// добавление файла в quiz
+$(".form-custom-file__input").change(function () {
+    var d_name = [];
+    for (var i = 0; i < $(this).get(0).files.length; ++i) {
+        d_name.push(" " + $(this).get(0).files[i].name);
+    }
+    $('#d_file').attr('data-text', d_name.join(", "));
+    // $("#d_name").val(d_name.join(", "));
+});
+
+$('.range-number_item').html($('#budget').val());
+
+$(document).on('input change', '#budget', function () {
+    var range = $(this).val().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  console.log(range);
+  $('.range-number_item').html(range);
+ });
+
+// const changePriceDiv = document.querySelector(".change-price");
+
+// function createPriceRange() {
+//   const minPrice = 50000;
+//   const maxPrice = 5000000;
+//   const step = 50000;
+
+//   const priceRangeInput = document.createElement("input");
+//   priceRangeInput.type = "range";
+//   priceRangeInput.id = "price-range";
+//   priceRangeInput.min = minPrice;
+//   priceRangeInput.max = maxPrice;
+//   priceRangeInput.step = step;
+
+//   const minPriceLabel = document.createElement("span");
+//   minPriceLabel.id = "min-price-label";
+//   minPriceLabel.textContent = "Мин: " + minPrice;
+
+//   const maxPriceLabel = document.createElement("span");
+//   maxPriceLabel.id = "max-price-label";
+//   maxPriceLabel.textContent = "Макс: " + maxPrice;
+
+//   const priceFilterButton = document.createElement("button");
+//   priceFilterButton.textContent = "Применить";
+//   priceFilterButton.addEventListener("click", applyPriceFilter);
+
+//   changePriceDiv.appendChild(priceRangeInput);
+//   changePriceDiv.appendChild(minPriceLabel);
+//   changePriceDiv.appendChild(maxPriceLabel);
+//   changePriceDiv.appendChild(priceFilterButton);
+// }
+
+// function applyPriceFilter() {
+//   const priceRangeInput = document.querySelector("#price-range");
+//   const minPriceLabel = document.querySelector("#min-price-label");
+//   const maxPriceLabel = document.querySelector("#max-price-label");
+
+//   const selectedMinPrice = parseInt(priceRangeInput.value);
+//   const selectedMaxPrice = parseInt(maxPriceLabel.textContent.split(":")[1].trim());
+
+//   // Filter the products based on the selected price range
+//   const filteredProducts = selectedProducts.filter(product => {
+//     const productPrice = parseInt(product.price.replace(/\D/g, ""));
+//     return productPrice >= selectedMinPrice && productPrice <= selectedMaxPrice;
+//   });
+// }
+// applyPriceFilter()
+// createPriceRange()

@@ -1,22 +1,21 @@
 import axios from "axios";
-
+let baseURL = "http://localhost:3000/goods";
+let totalItemCount = 0;
+let totalSaleAmount = 0;
 const reloadCartItems = (arr, place) => {
-
-
+  let totalPrice = 0; 
   let container = document.querySelector('.left');
-
-  let count = 0;
 
   const savedProducts = localStorage.getItem('selectedProducts');
   if (savedProducts) {
     const selectedProducts = JSON.parse(savedProducts);
 
-    if (savedProducts.length === 0) {
-      let cat = document.querySelector(".cat")
+    if (selectedProducts.length === 0) {
+      let cat = document.querySelector(".cat");
       const h1 = document.querySelector(".text-inactive");
       const p = document.querySelector(".p-inactive");
       const a = document.querySelector(".a-inactive");
-    
+
       cat.classList.replace("cat", "cat-active");
       h1.classList.replace("text-inactive", "text-active");
       p.classList.replace("p-inactive", "p-active");
@@ -27,8 +26,9 @@ const reloadCartItems = (arr, place) => {
     let totalTovar = document.getElementById("total-tovar");
     let totalSale = document.getElementById("total-sale");
 
-    selectedProducts.forEach(selectedProduct => {
 
+    selectedProducts.forEach(selectedProduct => {
+      let count = 0;
 
       const productCard = document.createElement('div');
       productCard.classList.add('product-card');
@@ -44,7 +44,6 @@ const reloadCartItems = (arr, place) => {
       productPage.appendChild(image);
       leftCard.append(productPage);
 
-
       const rightCard = document.createElement('div');
       rightCard.classList.add('right-card');
 
@@ -54,7 +53,6 @@ const reloadCartItems = (arr, place) => {
 
       const price = document.createElement('span');
       price.classList.add('price');
-
       rightCard.appendChild(price);
 
       const right = document.createElement('div');
@@ -75,50 +73,101 @@ const reloadCartItems = (arr, place) => {
       right.appendChild(plusBtn);
       rightCard.appendChild(right);
 
-      const deleteButton = document.createElement('button');
-      deleteButton.classList.add('delete');
-      deleteButton.innerHTML = 'Удалить';
-      rightCard.appendChild(deleteButton);
-      productPage.classList.add("productPage")
+      productPage.classList.add("productPage");
 
-      productCard.append(leftCard)
+      productCard.append(leftCard);
       productCard.appendChild(rightCard);
       container.appendChild(productCard);
 
-      heading.innerHTML = selectedProduct.title;
-      price.innerHTML = selectedProduct.price.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
-      image.src = selectedProduct.media[0];
-      image.alt = selectedProduct.title;
+      fetch(`${baseURL}/${selectedProduct.id}`)
+        .then(res => res.json())
+        .then(data => {
+          const newPrice = Math.floor(selectedProduct.price * (100 - data.salePercentage) / 100);
+          price.innerHTML = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+          totalPrice += newPrice * count;
 
-      plusBtn.addEventListener("click", () => {
-        count++;
-        countSpan.textContent = count;
-      });
+          const deleteButton = document.createElement('button');
+          deleteButton.classList.add('delete');
+          deleteButton.innerHTML = 'Удалить';
+          rightCard.appendChild(deleteButton);
+          productPage.classList.add("productPage");
 
-      minusBtn.addEventListener("click", () => {
-        count--;
-        countSpan.textContent = count;
-      });
+          productCard.append(leftCard);
+          productCard.appendChild(rightCard);
+          container.appendChild(productCard);
 
-      container.appendChild(productCard);
+          heading.innerHTML = selectedProduct.title;
+          image.src = selectedProduct.media[0];
+          image.alt = selectedProduct.title;
+
+          deleteButton.addEventListener("click", () => {
+            const savedProducts = localStorage.getItem('selectedProducts');
+            if (savedProducts) {
+              const selectedProducts = JSON.parse(savedProducts);
+              const updatedProducts = selectedProducts.filter(product => product.id !== selectedProduct.id);
+              localStorage.setItem('selectedProducts', JSON.stringify(updatedProducts));
+            }
+
+            productCard.remove();
+          });
+
+          plusBtn.addEventListener("click", () => {
+            count++;
+            countSpan.textContent = count;
+            totalPrice += newPrice;
+            totalItemCount++;
+            localStorage.setItem('totalPrice', totalPrice);
+            localStorage.setItem('totalItemCount', totalItemCount);
+            totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+            totalTovar.textContent = "Итого товаров: " + totalItemCount;
+            if (savedProducts.salePercentage > 0 ) {
+              totalSaleAmount = Math.floor(savedProducts.price * (100 - savedProducts.salePercentage) / 100);
+              // selectedProduct.price * (data.salePercentage / 100); 
+            } else {
+              totalSaleAmount = selectedProduct.price
+            }
+            console.log(totalSaleAmount);
+            console.log(JSON.stringify(savedProducts.price));
+            console.log(savedProducts.salePercentage);
+          });
+
+          minusBtn.addEventListener("click", () => {
+            if (count > 0) {
+              count--;
+              countSpan.textContent = count;
+              totalPrice -= newPrice;
+              totalItemCount--;
+              localStorage.setItem('totalPrice', totalPrice);
+              localStorage.setItem('totalItemCount', totalItemCount);
+              totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+              totalTovar.textContent = "Итого товаров: " + totalItemCount;
+            }
+          });
+
+          totalSale.innerHTML = totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+        })
+        .catch(err => console.error(err));
     });
 
+    totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+    totalTovar.textContent = "Итого товаров: " + totalItemCount;
+
+    totalSaleAmount = totalMoney
   } else {
-    let cardFlex = document.querySelector(".card-flex")
-    let zagolovok = document.querySelector("h1")
-    zagolovok.style.display = "none"
-    cardFlex.style.display = "none"
-    let cat = document.querySelector(".cat")
+    let cardFlex = document.querySelector(".card-flex");
+    let zagolovok = document.querySelector("h1");
+    zagolovok.style.display = "none";
+    cardFlex.style.display = "none";
+    let cat = document.querySelector(".cat");
     const h1 = document.querySelector(".text-inactive");
     const p = document.querySelector(".p-inactive");
     const a = document.querySelector(".a-inactive");
-  
+
     cat.classList.replace("cat", "cat-active");
     h1.classList.replace("text-inactive", "text-active");
     p.classList.replace("p-inactive", "p-active");
     a.classList.replace("a-inactive", "a-active");
   }
 };
-
 
 reloadCartItems();

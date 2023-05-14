@@ -9,7 +9,10 @@ export function header() {
   let left_side = document.createElement("div");
   let logo = document.createElement('img')
   let logoHref = document.createElement('a')
+  let katalogHref = document.createElement("a")
   let katalog = document.createElement('button')
+  katalogHref.append(katalog)
+  katalogHref.href = "/pages/katalog.html"
 
   let middle = document.createElement('div')
   let form = document.createElement("form")
@@ -68,7 +71,7 @@ export function header() {
   logoHref.append(logo)
   body.prepend(header);
   header.append(left_side, middle, right_side);
-  left_side.append(logoHref, katalog);
+  left_side.append(logoHref, katalogHref);
   userDiv.append(userLogo, userBtn)
   right_side.append(userHref, favouriteHref, cardHref);
   middle.append(form)

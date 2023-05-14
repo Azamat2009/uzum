@@ -1,6 +1,6 @@
 let baseURL = "http://localhost:3000/goods"
 let id = location.search
-
+let selectedProducts = [];
 fetch(baseURL + id)
     .then(res => res.json())
     .then(user => {
@@ -65,9 +65,44 @@ fetch(baseURL + id)
         addToCartBtn.classList.add("add-cart");
         addToCartBtn.textContent = "Добавить в корзину";
 
+
+        addToCartBtn.addEventListener('click', () => {
+          const isProductSelected = selectedProducts.some(product => product.id === user.id);
+          if (!isProductSelected) {
+            selectedProducts.push(user);
+            localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+          }
+        });
+
+        const savedProducts = localStorage.getItem('selectedProducts');
+        if (savedProducts) {
+          selectedProducts = JSON.parse(savedProducts);
+        }
+
         let addToFavBtn = document.createElement("button");
         addToFavBtn.classList.add("add-fav");
         addToFavBtn.textContent = "Добавить в избранное";
+
+        addToFavBtn.addEventListener('click', () => {
+          if (!user.favourite) {
+            user.favourite = true;
+
+  
+            fetch(`${baseURL}/${user.id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ favourite: true })
+            })
+              .then(res => {
+                if (!res.ok) {
+                  throw new Error('Failed to update favourite');
+                }
+              })
+              .catch(err => console.error(err));
+          }
+        });
 
         btns.appendChild(addToCartBtn);
         btns.appendChild(addToFavBtn);
@@ -113,10 +148,9 @@ fetch(baseURL + id)
             const similarGoods = goods.filter(good => good.type === type).slice(0, 5);
     
             similarGoods.forEach(good => {
-
               const cardDiv = document.createElement("div");
               const img1 = document.createElement("img");
-              let productPage = document.createElement("a")
+              let productPage = document.createElement("a");
               const heart = document.createElement("img");
               const heartActive = document.createElement("img");
               const h3 = document.createElement("h3");
@@ -125,13 +159,14 @@ fetch(baseURL + id)
               const span2 = document.createElement("span");
               const img4 = document.createElement("img");
               cardDiv.classList.add("card");
-              img1.classList.add("productImage")
+              img1.classList.add("productImage");
               beforeSale.classList.add("before-sale");
-              heart.classList.add("heart")
-              heartActive.classList.add("heart2")
+              heart.classList.add("heart");
+              heartActive.classList.add("heart2");
               bottomCardDiv.classList.add("bottom-card");
-    
-              productPage.href = `/pages/tovar.html?id=${good.id}`
+              img4.classList.add("card-img")
+        
+              productPage.href = `/pages/tovar.html?id=${good.id}`;
               heart.src = "/public/icons/heart.svg";
               heart.alt = "";
               heartActive.src = "/public/icons/heart 1.png";
@@ -143,17 +178,17 @@ fetch(baseURL + id)
               img4.id = "cardImg";
               img4.src = "/public/icons/card.svg";
               img4.alt = "";
-    
+        
               bottomCardDiv.appendChild(span2);
               bottomCardDiv.appendChild(img4);
-              productPage.append(img1)
+              productPage.append(img1);
               cardDiv.appendChild(productPage);
               cardDiv.appendChild(heart);
               cardDiv.appendChild(heartActive);
               cardDiv.appendChild(h3);
               cardDiv.appendChild(beforeSale);
               cardDiv.appendChild(bottomCardDiv);
-    
+        
               if (good.favourite) {
                 heart.classList.add('heart-none');
                 heartActive.classList.add('heart2-active');
@@ -203,13 +238,26 @@ fetch(baseURL + id)
                       if (!res.ok) {
                         throw new Error('Failed to update favourite');
                       }
+        
                       heart.classList.remove('heart-none');
                       heartActive.classList.remove('heart2-active');
-                    })
-                    .catch(err => console.error(err));
-                }
-              });
-        
+                      })
+                      .catch(err => console.error(err));
+                      }
+                      });
+                      
+                      img4.addEventListener('click', () => {
+                        const isProductSelected = selectedProducts.some(product => product.id === good.id);
+                        if (!isProductSelected) {
+                          selectedProducts.push(good);
+                          localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+                        }
+                      });
+              
+                      const savedProducts = localStorage.getItem('selectedProducts');
+                      if (savedProducts) {
+                        selectedProducts = JSON.parse(savedProducts);
+                      }
         
         
               fetch(`${baseURL}/${good.id}`)
