@@ -1,5 +1,6 @@
 let user = JSON.parse(localStorage.getItem('user'));
 let baseURL = "http://localhost:3000/goods";
+let locData = JSON.parse(localStorage.getItem("users"))
 
 export function header() {
   let body = document.body;
@@ -43,7 +44,7 @@ export function header() {
   userHref.href = ""
   favouriteHref.href = "/pages/favorite.html"
   logoHref.href = "/index.html"
-  userBtn.innerHTML = 'Шахзод'
+
   favouriteBtn.innerHTML = 'Избранное'
   favouriteBtn.href = "/pages/tovar.html"
   cardBtn.innerHTML = 'Корзина'
@@ -52,7 +53,15 @@ export function header() {
   logo.src = "/public/img/logo.png";
   userLogo.src = "/public/icons/user.svg";
 
+
+  if (!locData || !locData.name) {
+    userBtn.innerHTML = 'Шахзод';
+  } else {
+    userBtn.innerHTML = locData.name;
+  }
   
+
+
   cardHref.append(cardBtn)
   userHref.append(userDiv)
   favouriteHref.append(favouriteBtn)

@@ -1,13 +1,32 @@
 {
   "users": [
     {
-      "id": 1
+      "name": "азамат",
+      "email": "asa@gmai",
+      "password": "фяф",
+      "id": 1,
+      "favourite": false
+    },
+    {
+      "name": "daler aka",
+      "email": "10@gmail.com",
+      "password": "2222",
+      "id": 2,
+      "favourite": false
+    },
+    {
+      "name": "hhhh",
+      "email": "rakhmatov.azamat2009@gmail.com",
+      "password": "2222",
+      "id": 3,
+      "favourite": false
     }
   ],
   "goods": [
     {
+      "user_id": 1,
       "id": 1,
-      "favourite": false,
+      "favourite": true,
       "title": "Кресло компьютерное игровое Cougar ARMOR One Black-Orange",
       "description": "Cougar Armor One — игровое компьютерное кресло с высокой спинкой, поддерживающей позвоночник в анатомически правильном положении. Обивка сделана из воздухопроницаемой экокожи. В комплекте есть подушки для шеи и поясницы. За счет стального каркаса эта модель выдерживает нагрузку до 120 кг. Стул оснащен механизмом регулировки высоты «Газлифт». Металлический кожух защищает его от преждевременной поломки. Специальные ручки предназначены для настройки степени сопротивления к раскачиванию и его полной блокировки. Конструкция раскладывается на 180°. Подлокотники поворачиваются вправо и влево, их можно поднимать и опускать.",
       "colors": [
@@ -28,6 +47,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 2,
       "favourite": false,
       "title": "Кресло компьютерное игровое Red Square Pro Pure Black (RSQ-50020)",
@@ -49,6 +69,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 3,
       "favourite": false,
       "title": "Кресло компьютерное игровое Bloody GC-150",
@@ -70,6 +91,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 4,
       "favourite": false,
       "title": "Кресло компьютерное игровое Red Square Eco Blazing (RSQ-50026)",
@@ -92,6 +114,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 5,
       "favourite": false,
       "title": "Кресло компьютерное игровое ThunderX3 TC3 Azure Blue",
@@ -114,6 +137,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 6,
       "favourite": false,
       "title": "Кресло компьютерное игровое Red Square Pro: Fresh Lime",
@@ -136,6 +160,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 7,
       "favourite": false,
       "title": "Кресло компьютерное игровое Bloody GC-600",
@@ -157,6 +182,7 @@
       "type": "furniture"
     },
     {
+      "user_id": 1,
       "id": 8,
       "favourite": false,
       "title": "Кресло компьютерное игровое Bloody GC-100",
@@ -176,9 +202,15 @@
         "https://img.mvideo.ru/Big/50136541bb1.jpg",
         "https://img.mvideo.ru/Big/50136541bb1.jpg"
       ],
-      "type": "furniture"
+      "type": "furniture",
+      "likedProducts": [
+        10,
+        9,
+        8
+      ]
     },
     {
+      "user_id": 1,
       "id": 9,
       "favourite": false,
       "title": "Кресло компьютерное игровое Canyon Corax (CND-SGCH5)",
@@ -198,9 +230,14 @@
         "https://img.mvideo.ru/Big/40072385bb1.jpg",
         "https://img.mvideo.ru/Big/40072385bb1.jpg"
       ],
-      "type": "furniture"
+      "type": "furniture",
+      "likedProducts": [
+        10,
+        9
+      ]
     },
     {
+      "user_id": 1,
       "id": 10,
       "favourite": false,
       "title": "Кресло компьютерное Brabix Tender MG-330 Black (531845)",
@@ -219,9 +256,13 @@
         "https://img.mvideo.ru/Big/50132144bb.jpg",
         "https://img.mvideo.ru/Big/50132144bb.jpg"
       ],
-      "type": "furniture"
+      "type": "furniture",
+      "likedProducts": [
+        10
+      ]
     },
     {
+      "user_id": 1,
       "id": 11,
       "favourite": false,
       "title": "Системный блок игровой HYPERPC Concept 5",
@@ -243,6 +284,7 @@
       "type": "PC"
     },
     {
+      "user_id": 2,
       "id": 12,
       "favourite": false,
       "title": "Системный блок игровой Raskat STRIKE 920 105611 (i9-12900F/32GB/2TB+2TB/RTX3090Ti/W10)",
@@ -264,6 +306,7 @@
       "type": "PC"
     },
     {
+      "user_id": 3,
       "id": 13,
       "favourite": false,
       "title": "Системный блок игровой ASUS ROG Strix G15CE-1170KF0770",
@@ -285,6 +328,7 @@
       "type": "PC"
     },
     {
+      "user_id": 2,
       "id": 14,
       "favourite": false,
       "title": "Системный блок игровой Raskat STRIKE720 105608 (i7-12700F/32G/1T+2T/3080TI/W10)",
@@ -306,6 +350,7 @@
       "type": "PC"
     },
     {
+      "user_id": 3,
       "id": 15,
       "favourite": false,
       "title": "Видеокарта GIGABYTE RTX3090 GAMING OC-24G + монитор AORUS FV43U-EK",
@@ -349,7 +394,7 @@
     },
     {
       "id": 17,
-      "favourite": false,
+      "favourite": true,
       "title": "Монитор игровой HP OMEN X Emperium 65",
       "description": "По сравнению с монитором HP Omen X Emperium 65 его собратья смотрятся крошечными. Гигантский девайс позволит тебе в полной мере оценить виртуальные красоты и сможет заменить телевизор в комнате. Чтобы добиться максимального качества картинки, игровому компьютеру придётся изрядно напрячь начинку. С ЦАРСКИМ РАЗМАХОМ HP Omen X Emperium 65 относится к классу Big Format Gaming",
       "colors": [

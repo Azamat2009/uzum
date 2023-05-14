@@ -5,11 +5,11 @@ const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
 
 signUpButton.addEventListener('click', () =>
-  container.classList.add('right-panel-active')
+    container.classList.add('right-panel-active')
 );
 
 signInButton.addEventListener('click', () =>
-  container.classList.remove('right-panel-active')
+    container.classList.remove('right-panel-active')
 );
 
 let regis = document.forms.reg
@@ -32,7 +32,12 @@ regis.addEventListener("submit", (e) => {
     });
 
     if (user.email && user.name && user.password) {
-        axios.post('http://localhost:3000/users').then(res => console.log(res))
+        axios.post('http://localhost:3000/users', user).then(res => {
+            if (res.status === 200 || res.status === 201) {
+                container.classList.remove('right-panel-active')
+            }
+        })
+
     } else {
         alert("something went wrong,try again")
     }
@@ -47,9 +52,17 @@ let loc = JSON.parse(localStorage.getItem("users"))
 
 form.onsubmit = (e) => {
     e.preventDefault()
-    login[0].value = loc.email
 
-if (login[1].value === loc.password) {
-window.location.assign('/index.html')
-}
+    axios.get("http://localhost:3000/users?email=" + login[0].value)
+        .then(res => {
+            if (res.status === 200 || res.status === 201) {
+                let user = res.data[0]
+                if (login[1].value === user.password) {
+                    localStorage.setItem('users', JSON.stringify(user))
+                    window.location.assign('/index.html')
+                } else {
+                    alert('wrong password or email')
+                }
+            }
+        })
 }

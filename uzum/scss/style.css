@@ -294,6 +294,9 @@ span.sim-dot {
   width: 30px;
   height: 30px;
 }
+.cards .card .card-img:active, .cards2 .card .card-img:active, .cards3 .card .card-img:active {
+  scale: 0.9;
+}
 
 #back-to-top-btn {
   height: 50px;
@@ -356,4 +359,10 @@ center p a {
 }
 center p :hover {
   text-decoration: underline;
+}
+
+.banner {
+  margin: 90px 0px;
+  width: 100%;
+  background-size: contain;
 }/*# sourceMappingURL=style.css.map */

@@ -30,7 +30,7 @@ fetch(baseURL)
       heartActive.alt = "";
       h3.innerHTML = good.title;
       span2.textContent = good.price;
-      beforeSale.textContent = good.price + " сум";
+      beforeSale.textContent = good.price.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
       img1.src = good.media[0];
       img4.id = "cardImg";
       img4.src = "/public/icons/card.svg";
@@ -106,7 +106,7 @@ fetch(baseURL)
         .then(res => res.json())
         .then(data => {
           const newPrice = good.price * (100 - data.salePercentage) / 100;
-          span2.textContent = newPrice.toFixed(0) + " сум";
+          span2.textContent = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
         })
         .catch(err => console.error(err));
 

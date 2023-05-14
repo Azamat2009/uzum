@@ -312,6 +312,10 @@ body .i .container {
             width: 30px;
             height: 30px 
         }
+
+        .card-img:active {
+            scale: 0.9;
+        }
     }
 }
 
@@ -379,4 +383,10 @@ center {
             text-decoration: underline;
         }
     }
+}
+
+.banner {
+    margin: 90px 0px;
+    width: 100%;
+    background-size: contain;
 }
