@@ -63,11 +63,9 @@ export function header() {
     .then(data => {
       elasticItems = data;
 
-      // Retrieve savedProducts from localStorage
       const savedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
       cardCount.innerHTML = savedProducts.length;
 
-      // Store savedProducts in localStorage
       localStorage.setItem('selectedProducts', JSON.stringify(savedProducts));
     })
     .catch(error => console.error(error));
