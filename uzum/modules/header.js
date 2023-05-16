@@ -33,9 +33,14 @@ export function header() {
 
   let favouriteBtn = document.createElement('button')
   let favouriteHref = document.createElement("a")
+  let favouriteCount = document.createElement("span")
 
   let cardBtn = document.createElement('button')
   let cardHref = document.createElement("a")
+  let cardCount = document.createElement('span')
+
+  cardHref.classList.add('chislo')
+  favouriteHref.classList.add('chislo')
 
 
   middle.classList.add("middle")
@@ -45,17 +50,43 @@ export function header() {
   userDiv.classList.add("userDiv");
 
   userHref.href = ""
+  userHref.onclick = () => {
+    localStorage.clear()
+  }
   favouriteHref.href = "/pages/favorite.html"
   logoHref.href = "/index.html"
 
   favouriteBtn.innerHTML = 'Избранное'
-  favouriteBtn.href = "/pages/tovar.html"
+  favouriteBtn.href = "/pages/tovar.html";
+  fetch(baseURL)
+    .then(res => res.json())
+    .then(data => {
+      elasticItems = data;
+
+      // Retrieve savedProducts from localStorage
+      const savedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+      cardCount.innerHTML = savedProducts.length;
+
+      // Store savedProducts in localStorage
+      localStorage.setItem('selectedProducts', JSON.stringify(savedProducts));
+    })
+    .catch(error => console.error(error));
+
+
+
+
+fetch(baseURL)
+  .then(res => res.json())
+  .then(goods => {
+    const favouriteGoods = goods.filter(good => good.favourite === true);
+    favouriteCount.innerHTML = favouriteGoods.length
+  })
+
   cardBtn.innerHTML = 'Корзина'
   cardHref.href = "/pages/card.html"
   katalog.innerHTML = "Каталог"
   logo.src = "/public/img/logo.png";
   userLogo.src = "/public/icons/user.svg";
-
 
   if (!locData || !locData.name) {
     userBtn.innerHTML = 'Шахзод';
@@ -65,9 +96,9 @@ export function header() {
   
 
 
-  cardHref.append(cardBtn)
+  cardHref.append(cardBtn,cardCount)
   userHref.append(userDiv)
-  favouriteHref.append(favouriteBtn)
+  favouriteHref.append(favouriteBtn,favouriteCount)
   logoHref.append(logo)
   body.prepend(header);
   header.append(left_side, middle, right_side);

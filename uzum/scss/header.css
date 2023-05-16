@@ -151,4 +151,14 @@
 .marked-text {
   all: unset;
   color: #3333CC;
+}
+
+.chislo {
+  display: flex;
+  gap: 5px;
+}
+.chislo span {
+  background-color: #3333CC;
+  color: white;
+  padding: 2px;
 }/*# sourceMappingURL=header.css.map */

@@ -81,7 +81,53 @@ fetch(baseURL + id)
 
         let addToFavBtn = document.createElement("button");
         addToFavBtn.classList.add("add-fav");
+  
         addToFavBtn.textContent = "Добавить в избранное";
+
+        // плюс и минус
+let right = document.createElement("div");
+let plusBtn = document.createElement("button");
+let minusBtn = document.createElement("button");
+let countSpan = document.createElement("span");
+
+right.classList.add("right");
+
+plusBtn.style.marginTop = "8px"
+plusBtn.style.fontSize = "24px"
+plusBtn.innerHTML = "+";
+minusBtn.innerHTML = "-";
+countSpan.innerHTML = "1";
+
+
+let count = 1;
+plusBtn.addEventListener("click", () => {
+  count++;
+  countSpan.textContent = count;
+  updatePrice();
+});
+
+minusBtn.addEventListener("click", () => {
+  if (count > 0) {
+      count--;
+      countSpan.textContent = count;
+      updatePrice();
+  }
+});
+
+function updatePrice() {
+  fetch(`${baseURL}/${user.id}`)
+      .then(res => res.json())
+      .then(data => {
+          const newPrice = user.price * (100 - data.salePercentage) / 100;
+          const totalPrice = newPrice * count;
+          tovNewPrice.textContent = totalPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+      })
+      .catch(err => console.error(err));
+}
+
+right.append(minusBtn);
+right.append(countSpan);
+right.append(plusBtn);
 
         addToFavBtn.addEventListener('click', () => {
           if (!user.favourite) {
@@ -275,33 +321,7 @@ fetch(baseURL + id)
 })
 
 
-// плюс и минус
-let right = document.createElement("div");
-let plusBtn = document.createElement("button");
-let minusBtn = document.createElement("button");
-let countSpan = document.createElement("span");
 
-right.classList.add("right");
-
-plusBtn.style.marginTop = "8px"
-plusBtn.style.fontSize = "24px"
-plusBtn.innerHTML = "+";
-minusBtn.innerHTML = "-";
-countSpan.innerHTML = "0";
-
-
-let count = 0;
-plusBtn.addEventListener("click", () => {
-    count++;
-    countSpan.textContent = count;
-});
-minusBtn.addEventListener("click", () => {
-    count--;
-    countSpan.textContent = count;
-});
-right.append(minusBtn);
-right.append(countSpan);
-right.append(plusBtn);
 
 
 

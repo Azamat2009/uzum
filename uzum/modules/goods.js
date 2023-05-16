@@ -1,6 +1,6 @@
 let baseURL = "http://localhost:3000/goods";
 let cards = document.querySelectorAll(".cards")
-let selectedProducts = [];
+let selectedProducts = [];                  localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
 
 
 export function createGoods() {
@@ -57,6 +57,8 @@ export function createGoods() {
         heart.classList.remove('heart-none');
         heartActive.classList.remove('heart2-active');
       }
+
+      
 
       heart.addEventListener('click', () => {
         if (!good.favourite) {

@@ -77,99 +77,116 @@ const reloadCartItems = () => {
 
       productPage.classList.add("productPage");
 
+
       productCard.append(leftCard);
       productCard.appendChild(rightCard);
       container.appendChild(productCard);
 
       fetch(`${baseURL}/${selectedProduct.id}`)
-        .then(res => res.json())
-        .then(data => {
-          const newPrice = Math.floor(selectedProduct.price * (100 - data.salePercentage) / 100);
-          price.innerHTML = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-          totalPrice += newPrice * count;
-
-          totalSaleAmount += selectedProduct.price - newPrice;
-          console.log(totalSaleAmount);
-
-          const deleteButton = document.createElement('button');
-          deleteButton.classList.add('delete');
-          deleteButton.innerHTML = 'Удалить';
-          rightCard.appendChild(deleteButton);
-          productPage.classList.add("productPage");
-
-          productCard.append(leftCard);
-          productCard.appendChild(rightCard);
-          container.appendChild(productCard);
-
-
-          heading.innerHTML = selectedProduct.title;
-          image.src = selectedProduct.media[0];
-          image.alt = selectedProduct.title;
-
-          deleteButton.addEventListener("click", () => {
-            const savedProducts = localStorage.getItem('selectedProducts');
-            if (savedProducts) {
-              const selectedProducts = JSON.parse(savedProducts);
-              const updatedProducts = selectedProducts.filter(product => product.id !== selectedProduct.id);
-              localStorage.setItem('selectedProducts', JSON.stringify(updatedProducts));
-
-              totalPrice = updatedProducts.reduce((total, product) => {
-                const newPrice = Math.floor(product.price * (100 - data.salePercentage) / 100);
-                return total + newPrice;
-              }, 0);
-              totalItemCount = updatedProducts.length;
-
-              totalSaleAmount = updatedProducts.reduce((total, product) => {
-                const originalPrice = product.price * product.count;
-                const discountedPrice = totalPrice * product.count;
-                return total + (originalPrice - discountedPrice);
-              }, 0);
-
-              totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-              totalTovar.textContent = "Итого товаров: " + totalItemCount;
-              totalSale.textContent = "Итого скидки: " + totalSaleAmount;
-            }
-
-            productCard.remove();
-          });
-
-          plusBtn.addEventListener("click", () => {
-            count++;
+      .then(res => res.json())
+      .then(data => {
+        const newPrice = Math.floor(selectedProduct.price * (100 - data.salePercentage) / 100);
+        price.innerHTML = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+        totalPrice += newPrice * count;
+  
+        totalSaleAmount += selectedProduct.price - newPrice;
+        console.log(totalSaleAmount);
+  
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete');
+        deleteButton.innerHTML = 'Удалить';
+        rightCard.appendChild(deleteButton);
+        productPage.classList.add("productPage");
+  
+        productCard.append(leftCard);
+        productCard.appendChild(rightCard);
+        container.appendChild(productCard);
+  
+  
+        heading.innerHTML = selectedProduct.title;
+        image.src = selectedProduct.media[0];
+        image.alt = selectedProduct.title;
+  
+        deleteButton.addEventListener("click", () => {
+          const savedProducts = localStorage.getItem('selectedProducts');
+          if (savedProducts) {
+            const selectedProducts = JSON.parse(savedProducts);
+            const updatedProducts = selectedProducts.filter(product => product.id !== selectedProduct.id);
+            localStorage.setItem('selectedProducts', JSON.stringify(updatedProducts));
+  
+            totalPrice = updatedProducts.reduce((total, product) => {
+              const newPrice = Math.floor(product.price * (100 - data.salePercentage) / 100);
+              return total + newPrice;
+            }, 0);
+            totalItemCount = updatedProducts.length;
+  
+            totalSaleAmount = updatedProducts.reduce((total, product) => {
+              const originalPrice = product.price * product.count;
+              const discountedPrice = totalPrice * product.count;
+              return total + (originalPrice - discountedPrice);
+            }, 0);
+  
+            totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+            totalTovar.textContent = "Итого товаров: " + totalItemCount;
+            totalSale.textContent = "Итого скидки: " + totalSaleAmount;
+          }
+  
+          productCard.remove();
+          saveCartItems(); // Сохранить данные после удаления продукта
+        });
+  
+        plusBtn.addEventListener("click", () => {
+          count++;
+          countSpan.textContent = count;
+          totalPrice += newPrice;
+          totalItemCount++;
+          totalSaleAmount += selectedProduct.price - newPrice; 
+          localStorage.setItem('totalPrice', totalPrice);
+          localStorage.setItem('totalItemCount', totalItemCount);
+          totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+          totalTovar.textContent = "Итого товаров: " + totalItemCount;
+          totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+          saveCartItems(); // Сохранить данные после добавления продукта
+        });
+  
+        minusBtn.addEventListener("click", () => {
+          if (count > 0) {
+            count--;
             countSpan.textContent = count;
-            totalPrice += newPrice;
-            totalItemCount++;
-            totalSaleAmount += selectedProduct.price - newPrice; 
+            totalPrice -= newPrice;
+            totalItemCount--;
+            totalSaleAmount -= selectedProduct.price - newPrice;
             localStorage.setItem('totalPrice', totalPrice);
             localStorage.setItem('totalItemCount', totalItemCount);
             totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+
             totalTovar.textContent = "Итого товаров: " + totalItemCount;
             totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-          });
-
-          minusBtn.addEventListener("click", () => {
-            if (count > 0) {
-              count--;
-              countSpan.textContent = count;
-              totalPrice -= newPrice;
-              totalItemCount--;
-              totalSaleAmount -= selectedProduct.price - newPrice;
-              localStorage.setItem('totalPrice', totalPrice);
-              localStorage.setItem('totalItemCount', totalItemCount);
-              totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-              totalTovar.textContent = "Итого товаров: " + totalItemCount;
-              totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+            saveCartItems(); // Сохранить данные после изменения количества продукта
             }
-          });
-
-        })
-        .catch(err => console.error(err));
+            });    })
+            .catch(err => console.error(err));
+        });
+        
+        
+        totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+        totalTovar.textContent = "Итого товаров: " + totalItemCount;
+        totalSale.textContent = "Итого скидки: " + totalSaleAmount;
+      }
+    };
+    
+    // Функция для сохранения выбранных продуктов в localStorage
+    const saveCartItems = () => {
+    const selectedProducts = document.querySelectorAll('.product-card');
+    const updatedProducts = [];
+    
+    selectedProducts.forEach(product => {
+    const id = product.dataset.productId;
+    const count = product.querySelector('.right-card .right .countSpan').textContent;
+    updatedProducts.push({ id, count });
     });
-
-
-    totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-    totalTovar.textContent = "Итого товаров: " + totalItemCount;
-    totalSale.textContent = "Итого скидки: " + totalSaleAmount;
-  }
-};
-
-reloadCartItems();
+    
+    localStorage.setItem('selectedProducts', JSON.stringify(updatedProducts));
+    };
+    
+    reloadCartItems();
