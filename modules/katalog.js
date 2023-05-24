@@ -46,7 +46,7 @@ function createCardElement(good) {
   heart.classList.add("heart");
   heartActive.classList.add("heart2");
   bottomCardDiv.classList.add("bottom-card");
-  img4.classList.add("card-img");
+  img4.classList.add("card-img")
 
   productPage.href = `/pages/tovar.html?id=${good.id}`;
   heart.src = "/public/icons/heart.svg";
@@ -55,7 +55,7 @@ function createCardElement(good) {
   heartActive.alt = "";
   h3.innerHTML = good.title;
   span2.textContent = good.price;
-  beforeSale.textContent = good.price.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+  beforeSale.textContent = good.price.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
   img1.src = good.media[0];
   img4.id = "cardImg";
   img4.src = "/public/icons/card.svg";
@@ -120,12 +120,36 @@ function createCardElement(good) {
           if (!res.ok) {
             throw new Error('Failed to update favourite');
           }
+
           heart.classList.remove('heart-none');
           heartActive.classList.remove('heart2-active');
-        })
-        .catch(err => console.error(err));
-    }
-  });
+          })
+          .catch(err => console.error(err));
+          }
+          });
+          
+          img4.addEventListener('click', () => {
+            const isProductSelected = selectedProducts.some(product => product.id === good.id);
+            if (!isProductSelected) {
+              selectedProducts.push(good);
+              localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+            }
+          });
+  
+          const savedProducts = localStorage.getItem('selectedProducts');
+          if (savedProducts) {
+            selectedProducts = JSON.parse(savedProducts);
+          }
+
+
+  fetch(`${baseURL}/${good.id}`)
+    .then(res => res.json())
+    .then(data => {
+      const newPrice = good.price * (100 - data.salePercentage) / 100;
+      span2.textContent = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
+    })
+    .catch(err => console.error(err));
+  cardsDiv.appendChild(cardDiv);
 
   return cardDiv;
 }

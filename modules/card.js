@@ -30,7 +30,7 @@ const reloadCartItems = () => {
     let totalSale = document.getElementById("total-sale");
 
     selectedProducts.forEach(selectedProduct => {
-      let count = 0;
+      let count = 1;
 
       const productCard = document.createElement('div');
       productCard.classList.add('product-card');
@@ -66,7 +66,7 @@ const reloadCartItems = () => {
       right.appendChild(minusBtn);
 
       const countSpan = document.createElement('span');
-      countSpan.innerHTML = '0';
+      countSpan.innerHTML = '1'; 
       right.appendChild(countSpan);
 
       const plusBtn = document.createElement('button');
@@ -87,24 +87,18 @@ const reloadCartItems = () => {
           const newPrice = Math.floor(selectedProduct.price * (100 - data.salePercentage) / 100);
           price.innerHTML = newPrice.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
           totalPrice += newPrice * count;
-
+          totalItemCount += count;
           totalSaleAmount += selectedProduct.price - newPrice;
-          console.log(totalSaleAmount);
 
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete');
           deleteButton.innerHTML = 'Удалить';
           rightCard.appendChild(deleteButton);
-          productPage.classList.add("productPage");
+          productPage
 
-          productCard.append(leftCard);
-          productCard.appendChild(rightCard);
-          container.appendChild(productCard);
-
-
-          heading.innerHTML = selectedProduct.title;
-          image.src = selectedProduct.media[0];
-          image.alt = selectedProduct.title;
+          totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+          totalTovar.textContent = "Итого товаров: " + totalItemCount;
+          totalSale.textContent = "Итого скидки: " + totalSaleAmount.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
 
           deleteButton.addEventListener("click", () => {
             const savedProducts = localStorage.getItem('selectedProducts');
@@ -127,7 +121,7 @@ const reloadCartItems = () => {
 
               totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
               totalTovar.textContent = "Итого товаров: " + totalItemCount;
-              totalSale.textContent = "Итого скидки: " + totalSaleAmount;
+              totalSale.textContent = "Итого скидки: " + totalSaleAmount.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
             }
 
             productCard.remove();
@@ -138,12 +132,12 @@ const reloadCartItems = () => {
             countSpan.textContent = count;
             totalPrice += newPrice;
             totalItemCount++;
-            totalSaleAmount += selectedProduct.price - newPrice; 
+            totalSaleAmount += selectedProduct.price - newPrice;
             localStorage.setItem('totalPrice', totalPrice);
             localStorage.setItem('totalItemCount', totalItemCount);
             totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
             totalTovar.textContent = "Итого товаров: " + totalItemCount;
-            totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+            totalSale.textContent = "Итого скидки: " + totalSaleAmount.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
           });
 
           minusBtn.addEventListener("click", () => {
@@ -157,18 +151,13 @@ const reloadCartItems = () => {
               localStorage.setItem('totalItemCount', totalItemCount);
               totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
               totalTovar.textContent = "Итого товаров: " + totalItemCount;
-              totalSale.textContent = "Итого скидки: " + totalSaleAmount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
+              totalSale.textContent = "Итого скидки: " + totalSaleAmount.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум"
             }
           });
 
         })
         .catch(err => console.error(err));
     });
-
-
-    totalMoney.textContent = totalPrice.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') + " сум";
-    totalTovar.textContent = "Итого товаров: " + totalItemCount;
-    totalSale.textContent = "Итого скидки: " + totalSaleAmount;
   }
 };
 
