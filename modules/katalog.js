@@ -154,6 +154,23 @@ function createCardElement(good) {
   return cardDiv;
 }
 
+function filterByHighRating() {
+  fetch(baseURL)
+    .then(res => res.json())
+    .then(goods => {
+      cardsDiv.innerHTML = "";
+
+      const highRatingGoods = goods.filter(good => good.rating >= 4);
+
+      highRatingGoods.forEach(good => {
+        const cardDiv = createCardElement(good);
+        cardsDiv.appendChild(cardDiv);
+      });
+    })
+    .catch(err => console.error(err));
+}
+
+
 function updateGoods() {
   let selectedBrands = [];
   if (lattliv.checked) selectedBrands.push("latt liv");
@@ -163,20 +180,41 @@ function updateGoods() {
   if (hagibis.checked) selectedBrands.push("hagibis");
   if (novey.checked) selectedBrands.push("novey");
 
-  fetch(baseURL)
-    .then(res => res.json())
-    .then(goods => {
-      cardsDiv.innerHTML = "";
+  let selectedOption = document.getElementById("kategories").value;
 
-      goods.forEach(good => {
-        if (selectedBrands.length === 0 || selectedBrands.includes(good.brand)) {
-          const cardDiv = createCardElement(good);
-          cardsDiv.appendChild(cardDiv);
-        }
-      });
-    })
-    .catch(err => console.error(err));
+  if (selectedOption === "bigRating") {
+    filterByHighRating();
+  } else {
+    fetch(baseURL)
+      .then(res => res.json())
+      .then(goods => {
+        cardsDiv.innerHTML = "";
+
+        goods.forEach(good => {
+          if (selectedBrands.length === 0 || selectedBrands.includes(good.brand)) {
+            if (selectedOption === "cheaper" && good.price <= 100000) {
+              const cardDiv = createCardElement(good);
+              cardsDiv.appendChild(cardDiv);
+            } else if (selectedOption === "expensive" && good.price > 100000) {
+              const cardDiv = createCardElement(good);
+              cardsDiv.appendChild(cardDiv);
+            } else if (selectedOption !== "cheaper" && selectedOption !== "expensive") {
+              const cardDiv = createCardElement(good);
+              cardsDiv.appendChild(cardDiv);
+            }
+          }
+        });
+      })
+      .catch(err => console.error(err));
+  }
 }
+
+document.getElementById("kategories").addEventListener("change", updateGoods);
+
+createGoods();
+
+
+
 function updateCategory(category) {
   categoriesAll.classList.remove('category-active');
   categories1.classList.remove('category-active');
