@@ -70,3 +70,23 @@ hr {
         }
     }
 }
+
+@media (max-width: 390px) {
+    footer {
+        max-width: 350px;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 10px;
+
+        .links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        font-size: 13px;
+        img {
+            height: 20px;
+        }
+    }
+}

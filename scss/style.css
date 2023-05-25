@@ -365,4 +365,42 @@ center p :hover {
   margin: 90px 0px;
   width: 100%;
   background-size: contain;
+}
+
+@media (max-width: 390px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+  }
+  .cards .card {
+    width: 150px;
+  }
+  .cards .card .heart {
+    position: absolute;
+    transform: translate(130px, 0px);
+  }
+  .cards .card .heart-none {
+    position: absolute;
+    display: none;
+    transform: translate(130px, 0px);
+  }
+  .cards .card .heart2 {
+    position: absolute;
+    transform: translate(130px, 0px);
+    display: none;
+  }
+  .cards .card .heart2-active {
+    position: absolute;
+    transform: translate(130px, 0px);
+    display: block;
+  }
+  .cards .card .productImage {
+    height: 100px;
+  }
+  .cards .card h3 {
+    font-size: 12px;
+  }
+  .titles {
+    font-size: 20px;
+  }
 }/*# sourceMappingURL=style.css.map */

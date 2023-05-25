@@ -390,3 +390,46 @@ center {
     width: 100%;
     background-size: contain;
 }
+
+@media (max-width: 390px) {
+    .cards {
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 30px;
+
+        .card {
+            width: 150px;
+
+            .heart {
+                position: absolute;
+                transform: translate(130px,0px);
+            }
+            .heart-none {
+                position: absolute;
+                display: none;
+                transform: translate(130px,00px);
+            }
+            .heart2 {
+                position: absolute;
+                transform: translate(130px,00px);
+                display: none;
+            }
+            .heart2-active {
+                position: absolute;
+                transform: translate(130px,00px);
+                display: block;
+            }
+
+            .productImage {
+                height: 100px;
+            }
+            
+            h3 {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .titles {
+        font-size: 20px;
+    }
+}
