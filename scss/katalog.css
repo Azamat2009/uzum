@@ -3,13 +3,13 @@
   display: flex;
   justify-content: space-between;
 }
-.zagolovki .right {
+.zagolovki .right2 {
   transform: translate(0px, 10px);
 }
-.zagolovki .right label {
+.zagolovki .right2 label {
   color: #62656A;
 }
-.zagolovki .right select {
+.zagolovki .right2 select {
   all: unset;
   margin-left: 5px;
   border: 1px solid #c4c4c4;
@@ -71,6 +71,9 @@ hr {
 }
 .main .left .menu ul li:hover {
   text-decoration: underline;
+}
+.main .sticky {
+  overflow-x: scroll;
 }
 .main .cards, .main .product-list {
   display: grid;
@@ -218,4 +221,52 @@ input[type=radio]:checked:before {
 }
 input[type=radio]:hover:before {
   border: 1px solid #40A5C6;
+}
+
+@media (max-width: 390px) {
+  .zagolovki .right2 {
+    transform: translate(50px, -10px);
+  }
+  h1 {
+    font-size: 16px;
+  }
+  .sticky {
+    top: 40px;
+    position: sticky;
+    overflow-x: scroll !important;
+  }
+  .cards, .product-list {
+    display: flex !important;
+    flex-direction: column;
+  }
+  .cards .card, .product-list .card {
+    display: flex;
+    cursor: pointer;
+    gap: 10px;
+    flex-direction: column;
+    width: 190px !important;
+    overflow: hidden;
+  }
+  .cards .card .heart, .product-list .card .heart {
+    position: absolute;
+    transform: translate(160px, 0px) !important;
+  }
+  .cards .card .heart-none, .product-list .card .heart-none {
+    position: absolute;
+    display: none;
+    transform: translate(160px, 0px) !important;
+  }
+  .cards .card .heart2, .product-list .card .heart2 {
+    position: absolute;
+    transform: translate(160px, 0px) !important;
+    display: none;
+  }
+  .cards .card .heart2-active, .product-list .card .heart2-active {
+    position: absolute;
+    transform: translate(160px, 0px) !important;
+    display: block;
+  }
+  .nav-h2 {
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=katalog.css.map */

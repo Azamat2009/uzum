@@ -587,7 +587,8 @@
         "https://img.mvideo.ru/Big/10028518bb1.jpg",
         "https://img.mvideo.ru/Big/10028518bb1.jpg"
       ],
-      "type": "audio"
+      "type": "audio",
+      "favourite": false
     },
     {
       "id": 25,

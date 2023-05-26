@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
 
-    .right {
+    .right2 {
         transform: translate(0px,10px);
 
         label {
@@ -85,7 +85,10 @@ hr {
             }
         }
     }
-
+    .sticky {
+        overflow-x: scroll;
+      }
+      
     .cards,.product-list {
         display: grid;
         grid-template-columns: repeat(4,1fr);
@@ -256,5 +259,66 @@ $border: #626262;
       &:before {
         border: 1px solid $blue;
       }
+    }
+  }
+
+
+  @media (max-width: 390px) { 
+    .zagolovki {
+        .right2 {
+            transform: translate(50px,-10px);
+        }
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .sticky {
+        top: 40px;
+        position: sticky;
+        overflow-x: scroll !important;
+    }
+
+      
+
+    .cards,.product-list {
+        display: flex !important;
+        flex-direction: column;
+
+        .card {
+            display: flex;
+            cursor: pointer;
+            gap: 10px;
+            flex-direction: column;
+            width: 190px !important;
+            overflow: hidden;
+
+            .heart {
+                position: absolute;
+                transform: translate(160px,0px) !important;
+            }
+            .heart-none {
+                position: absolute;
+                display: none;
+                transform: translate(160px,0px) !important;
+            }
+            .heart2 {
+                position: absolute;
+                transform: translate(160px,0px) !important;
+                display: none;
+            }
+            .heart2-active {
+                position: absolute;
+                transform: translate(160px,0px) !important;
+                display: block;
+            }
+
+        }
+
+    }
+
+    .nav-h2 {
+        font-size: 12px;
     }
   }
