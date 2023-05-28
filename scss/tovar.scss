@@ -242,3 +242,54 @@ span.sim-dot {
   padding: 2px 0 0 2px;
   transition: 1s;
 }
+
+@media (max-width: 390px) { 
+
+  .tovar-flex {
+    flex-direction: column;
+    width: 95%;
+    gap: 0px;
+    
+
+    .sim-slider-list {
+      img {
+        transform: translate(25px,0px);
+        height: 300px;
+        width: 300px;
+        background-size: contain;
+        position: sticky;
+        top: 0px;
+      }
+    }
+
+  }
+
+  .tovar-right {
+    h2 {
+      font-size: 20px;
+    }
+    .prices {
+      span {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .tovar-bottom {
+    margin-top: 100px;
+    width: 95%;
+
+    .tovBottomDescription {
+      transform: translate(30px,0px);
+      
+    }
+    h2 {
+      transform: translate(70px,0px);
+      font-size: 20px;
+    }
+  }
+  #ggg {
+    transform: translate(75px,0px);
+    font-size: 20px;
+  }
+}

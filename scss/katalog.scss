@@ -85,9 +85,6 @@ hr {
             }
         }
     }
-    .sticky {
-        overflow-x: scroll;
-      }
       
     .cards,.product-list {
         display: grid;
@@ -277,7 +274,6 @@ $border: #626262;
     .sticky {
         top: 40px;
         position: sticky;
-        overflow-x: scroll !important;
     }
 
       

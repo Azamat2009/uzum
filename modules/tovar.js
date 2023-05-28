@@ -161,6 +161,7 @@ right.append(plusBtn);
         tovBottomTitle.textContent = "Описание товара";
 
         let tovBottomDescription = document.createElement("p");
+        tovBottomDescription.classList.add('tovBottomDescription')
         tovBottomDescription.innerHTML = user.description;
 
         tovarBottom.appendChild(tovBottomTitle);

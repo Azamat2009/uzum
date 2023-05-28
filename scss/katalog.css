@@ -72,9 +72,6 @@ hr {
 .main .left .menu ul li:hover {
   text-decoration: underline;
 }
-.main .sticky {
-  overflow-x: scroll;
-}
 .main .cards, .main .product-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -233,7 +230,6 @@ input[type=radio]:hover:before {
   .sticky {
     top: 40px;
     position: sticky;
-    overflow-x: scroll !important;
   }
   .cards, .product-list {
     display: flex !important;
